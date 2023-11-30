@@ -11,7 +11,7 @@ public:
 	Line();
 	Line(const Point&, const Point&);
 
-
+	void* operator new(size_t i);
 
 	virtual void draw() const override;
 };

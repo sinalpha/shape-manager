@@ -5,7 +5,7 @@
 // --------------------------
 #include <iostream>
 #include "shapeManager.h"
-
+#include "utility.h"
 
 using namespace std;
 
@@ -24,14 +24,7 @@ ShapeManager::~ShapeManager()
 	delete[] shapes;
 }
 
-int getOption(string txt) {
-	
-	cout << txt;
-	int sel; 
-	cin >> sel; 
-	return sel;
 
-}
 
 bool ShapeManager::action() {
 
@@ -67,7 +60,7 @@ Shape* ShapeManager::selShape() {
 	case 3:
 		return newTriangle();
 	case 4:
-		return newLine();
+		return new Line;
 	default:
 		cout << "1 - Circle\n";
 		cout << "2 - Rectangle\n";
@@ -137,25 +130,6 @@ Rectangle* ShapeManager::newRectangle() {
 	}
 }
 
-Line* ShapeManager::newLine() {
-
-	while (true) {
-		Point points[2];
-		switch (getOption("생성할 방법을 선택하시오: ")) {
-		case 1:
-			return new Line;
-		case 2:
-			for (int i = 0; i < 2; ++i) {
-				cout << "input x" << i + 1 << ", y" << i + 1 << '\n';
-				cin >> points[i].x >> points[i].y;
-			}
-			return new Line(points[0], points[1]);
-		default:
-			cout << "1 - 디폴트 생성\n";
-			cout << "2 - 점으로 생성\n";
-		}
-	}
-}
 
 void ShapeManager::insert(Shape* a)
 {

@@ -28,7 +28,7 @@ ShapeManager::~ShapeManager()
 
 bool ShapeManager::action() {
 
-	switch (getOption("할 행동을 선택하시오: ")){
+	switch (getOption("할 행동을 선택하시오 Help:0: ")){
 	case 1: insert(selShape());
 		break;
 	case 2: draw();
@@ -60,7 +60,7 @@ Shape* ShapeManager::selShape() {
 	case 3:
 		return newTriangle();
 	case 4:
-		return new Line;
+		return newLine();
 	default:
 		cout << "1 - Circle\n";
 		cout << "2 - Rectangle\n";
@@ -69,8 +69,7 @@ Shape* ShapeManager::selShape() {
 		return nullptr;
 	}
 	
-}
-
+} 
 Triangle* ShapeManager::newTriangle() {
 	while (true) {
 		Point points[3];
@@ -130,6 +129,24 @@ Rectangle* ShapeManager::newRectangle() {
 	}
 }
 
+Line* ShapeManager::newLine() {
+	while (true) {
+		Point points[2];
+		switch (getOption("생성할 방법을 선택하시오: ")) {
+		case 1:
+			return new Line;
+		case 2:
+			for (int i = 0; i < 2; ++i) {
+				std::cout << "input x" << i + 1 << ", y" << i + 1 << '\n';
+				std::cin >> points[i].x >> points[i].y;
+			}
+			return new Line(points[0], points[1]);
+		default:
+			std::cout << "1 - 디폴트 생성\n";
+			std::cout << "2 - 점으로 생성\n";
+		}
+	}
+}
 
 void ShapeManager::insert(Shape* a)
 {

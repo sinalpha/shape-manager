@@ -15,5 +15,9 @@ int main()
 	ShapeManager sm(100);
 
 	while (sm.action());
-		
+
+
+
+
+
 }

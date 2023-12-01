@@ -15,7 +15,6 @@ ShapeManager::ShapeManager(int n)
 	capacity = n;
 	shapes = new Shape * [capacity];
 }
-
 ShapeManager::~ShapeManager()
 {
 	for (int i = 0; i < nShape; ++i)
@@ -23,11 +22,10 @@ ShapeManager::~ShapeManager()
 
 	delete[] shapes;
 }
-
 bool ShapeManager::action(int option) {
 	string shape, way{};
 	switch (option) {
-	case 1:	
+	case 1:
 		cout << "(도형) (생성 방법): ";
 		cin >> shape >> way;
 		insert(selShape(shape[0] - '0', way[0] - '0'));
@@ -58,7 +56,6 @@ Shape* ShapeManager::selShape(int shape,int way) {
 	}
 	
 } 
-
 Triangle* ShapeManager::newTriangle(int way) {
 		Point points[3];
 		switch (way) {
@@ -75,7 +72,6 @@ Triangle* ShapeManager::newTriangle(int way) {
 			return nullptr;
 		}
 }
-
 Circle* ShapeManager::newCircle(int way) {
 	
 	while (true) {
@@ -93,7 +89,6 @@ Circle* ShapeManager::newCircle(int way) {
 		}
 	}
 }
-
 Rectangle* ShapeManager::newRectangle(int way) {
 	
 	while (true) {
@@ -113,7 +108,6 @@ Rectangle* ShapeManager::newRectangle(int way) {
 
 	}
 }
-
 Line* ShapeManager::newLine(int way) {
 	while (true) {
 		Point points[2];
@@ -131,7 +125,6 @@ Line* ShapeManager::newLine(int way) {
 		}
 	}
 }
-
 void ShapeManager::insert(Shape* a)
 {
 
@@ -157,7 +150,6 @@ void ShapeManager::insert(Shape* a)
 		
 	printStatus("도형을 만드는데 성공하였습니다");
 }
-
 void ShapeManager::draw() const
 {
 	printStatus("모든 도형을 그립니다");
@@ -169,15 +161,16 @@ void ShapeManager::draw() const
 
 	printStatus("그리기를 마칩니다");
 }
-
 void ShapeManager::deleteSpecificShape() {
 	printStatus("특정 도형을 모두 지웁니다");
 
 	printStatus("특정 도형을 모두 지웠습니다");
 }
-
 void ShapeManager::deleteNthShape() {
 	printStatus("n번째 도형을 지웁니다");
 
 	printStatus("n번째 도형을 지웠습니다");
 }
+
+
+

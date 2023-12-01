@@ -18,7 +18,7 @@
     <ClCompile Include="circle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImplePolymorsm.cpp">
+    <ClCompile Include="다형성구현하기.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rectangle.cpp">

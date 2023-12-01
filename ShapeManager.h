@@ -30,7 +30,7 @@ class ShapeManager {
 	void deleteNthShape();
 
 public:
-	explicit ShapeManager(int );		// 담을 수 있는 도형의 갯수를 생섲자에 전달
+	explicit ShapeManager(int);		// 담을 수 있는 도형의 갯수를 생섲자에 전달
 										// explicit 사용법을 알아보자
 	~ShapeManager();
 	ShapeManager(const ShapeManager&) = default;

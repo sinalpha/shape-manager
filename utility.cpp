@@ -2,13 +2,13 @@
 
 #include "utility.h"
 
-void printStatus(std::string status) {
+void printStatus(const std::string status) {
 	std::cout << "----------------------" << '\n';
 	std::cout << status << '\n';
 	std::cout << "----------------------" << '\n';
 }
 
-void printStatus(std::string status, int capacity, int nShape) {
+void printStatus(const std::string status, int capacity, int nShape) {
 	std::cout << "-----------------------" << '\n';
 	std::cout << "모든 도형을 그립니다." << '\n';
 	std::cout << "Capacitiy: " << capacity << '\n';
@@ -26,3 +26,5 @@ int getOption() {
 	else
 		return 5;
 }
+
+

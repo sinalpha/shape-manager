@@ -2,12 +2,12 @@
 #include "line.h"
 
 Line::Line()
-	: st{}, ed{}
+	: st{}, ed{}, Shape{ "Line" }
 {
 }
 
 Line::Line(const Point& p1, const Point& p2) 
-	: st{p1}, ed{p2}
+	: st{p1}, ed{p2}, Shape{"Line"}
 {
 }
 

@@ -12,9 +12,9 @@
 
 int main()
 {
-	ShapeManager sm(100);
+	ShapeManager sm(1);
 
-	printStatus("프로그램을 시작합니다");
+	
 
 	int option;
 	while (0 != (option = getOption()))
@@ -22,7 +22,7 @@ int main()
 			printStatus(help);
 	
 
-	printStatus("프로그램을 종료합니다");
+	
 
 }
 

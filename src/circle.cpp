@@ -2,12 +2,12 @@
 #include "circle.h"
 
 Circle::Circle()
-	: center(), rad(0.0)
+	: center(), rad(0.0), Shape{ "Circle" }
 {
 }
 
 Circle::Circle(const Point& c, double r)
-	: center(c), rad(r)
+	: center(c), rad(r), Shape{"Circle"}
 {
 }
 

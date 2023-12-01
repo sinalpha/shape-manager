@@ -18,6 +18,26 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\circle.h" />
+    <ClInclude Include="src\line.h" />
+    <ClInclude Include="src\point.h" />
+    <ClInclude Include="src\rectangle.h" />
+    <ClInclude Include="src\shape.h" />
+    <ClInclude Include="src\ShapeManager.h" />
+    <ClInclude Include="src\triangle.h" />
+    <ClInclude Include="src\utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\circle.cpp" />
+    <ClCompile Include="src\line.cpp" />
+    <ClCompile Include="src\point.cpp" />
+    <ClCompile Include="src\rectangle.cpp" />
+    <ClCompile Include="src\ShapeManager.cpp" />
+    <ClCompile Include="src\triangle.cpp" />
+    <ClCompile Include="src\utility.cpp" />
+    <ClCompile Include="src\다형성구현하기.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -126,26 +146,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="circle.cpp" />
-    <ClCompile Include="다형성구현하기.cpp" />
-    <ClCompile Include="line.cpp" />
-    <ClCompile Include="point.cpp" />
-    <ClCompile Include="utility.cpp" />
-    <ClCompile Include="rectangle.cpp" />
-    <ClCompile Include="ShapeManager.cpp" />
-    <ClCompile Include="triangle.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="circle.h" />
-    <ClInclude Include="line.h" />
-    <ClInclude Include="point.h" />
-    <ClInclude Include="rectangle.h" />
-    <ClInclude Include="shape.h" />
-    <ClInclude Include="ShapeManager.h" />
-    <ClInclude Include="utility.h" />
-    <ClInclude Include="triangle.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

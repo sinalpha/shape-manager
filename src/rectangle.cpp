@@ -7,12 +7,12 @@
 #include "rectangle.h"
 
 Rectangle::Rectangle()
-	: p1(), p2()
+	: p1(), p2(), Shape{ "Rectangle" }
 {
 };
 
 Rectangle::Rectangle(const Point& a, const Point& b)
-	: p1(a), p2(b)
+	: p1(a), p2(b), Shape{ "Rectangle" }
 {
 };
 

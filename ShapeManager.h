@@ -19,22 +19,21 @@ class ShapeManager {
 	Shape** shapes;
 
 
-	Triangle* newTriangle();
-	Circle* newCircle();
-	Rectangle* newRectangle();
-	Line* newLine();
-	Shape* selShape();
+	Triangle* newTriangle(int);
+	Circle* newCircle(int);
+	Rectangle* newRectangle(int);
+	Line* newLine(int);
+	Shape* selShape(int, int);
 	void insert(Shape*);
 	void draw() const;
 	void deleteSpecificShape();
 	void deleteNthShape();
-	
 
 public:
-	explicit ShapeManager(int n);		// 담을 수 있는 도형의 갯수를 생섲자에 전달
+	explicit ShapeManager(int );		// 담을 수 있는 도형의 갯수를 생섲자에 전달
 										// explicit 사용법을 알아보자
 	~ShapeManager();
 	ShapeManager(const ShapeManager&) = default;
 
-	bool action();
+	bool action(int);
 };

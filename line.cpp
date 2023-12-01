@@ -1,6 +1,5 @@
 #include <iostream>
 #include "line.h"
-#include "utility.h"
 
 Line::Line()
 	: st{}, ed{}

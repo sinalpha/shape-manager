@@ -24,56 +24,44 @@ ShapeManager::~ShapeManager()
 	delete[] shapes;
 }
 
-
-
-bool ShapeManager::action() {
-
-	switch (getOption("할 행동을 선택하시오 Help:0: ")){
-	case 1: insert(selShape());
-		break;
+bool ShapeManager::action(int option) {
+	string shape, way{};
+	switch (option) {
+	case 1:	
+		cout << "(도형) (생성 방법): ";
+		cin >> shape >> way;
+		insert(selShape(shape[0] - '0', way[0] - '0'));
+		return true;
 	case 2: draw();
-		break;
+		return true;
 	case 3: deleteSpecificShape();
-		break;
+		return true;
 	case 4: deleteNthShape();
-		break;
-	case 5:
-		return false;
+		return true;
 	default:
-		cout << "1: 원하는 도형 추가\n";
-		cout << "2: 전체 도형을 그리기\n";
-		cout << "3: n번째 도형을 제거\n";
-		cout << "4: 원하는 도형을 모두 제거\n";
-		cout << "5: 프로그램 종료하기\n";
+		return false;
 	}
-
-	return true;
 }
 
-Shape* ShapeManager::selShape() {
-
-	switch (getOption("추가할 도형을 선택하시오: ")) {
+Shape* ShapeManager::selShape(int shape,int way) {
+	switch (shape) {
 	case 1:
-		return newCircle();
+		return newCircle(way);
 	case 2:
-		return newRectangle();
+		return newRectangle(way);
 	case 3:
-		return newTriangle();
-	case 4:
-		return newLine();
-	default:
-		cout << "1 - Circle\n";
-		cout << "2 - Rectangle\n";
-		cout << "3 - Triangle\n";
-		cout << "4 - Line\n";
+		return newTriangle(way);
+	case 4:	
+		return newLine(way);
+	default: 
 		return nullptr;
 	}
 	
 } 
-Triangle* ShapeManager::newTriangle() {
-	while (true) {
+
+Triangle* ShapeManager::newTriangle(int way) {
 		Point points[3];
-		switch (getOption("생성할 방법을 선택하시오: ")) {
+		switch (way) {
 		case 1:
 			return new Triangle;
 		case 2:
@@ -83,37 +71,34 @@ Triangle* ShapeManager::newTriangle() {
 				cin >> points[i].x >> points[i].y;
 			}
 			return new Triangle(points[0], points[1], points[2]);
-		default:
-			cout << "1 - 디폴트 생성\n";
-			cout << "2 - 점으로 생성\n";
+		default: 
+			return nullptr;
 		}
-	}
 }
 
-Circle* ShapeManager::newCircle() {
+Circle* ShapeManager::newCircle(int way) {
 	
 	while (true) {
 		Point point;
 		double r;
-		switch (getOption("생성할 방법을 선택하시오: ")) {
+		switch (way) {
 		case 1:
 			return new Circle;
 		case 2:
 			cout << "input x, y, r" <<  '\n';
 			cin >> point.x >> point.y >> r;
 			return new Circle(point, r);
-		default:
-			cout << "1 - 디폴트 생성\n";
-			cout << "2 - 점으로 생성\n";
+		default: 
+			return nullptr;
 		}
 	}
 }
 
-Rectangle* ShapeManager::newRectangle() {
+Rectangle* ShapeManager::newRectangle(int way) {
 	
 	while (true) {
 		Point points[2];
-		switch (getOption("생성할 방법을 선택하시오: ")) {
+		switch (way) {
 		case 1:
 			return new Rectangle;
 		case 2:
@@ -122,17 +107,17 @@ Rectangle* ShapeManager::newRectangle() {
 				cin >> points[i].x >> points[i].y;
 			}
 			return new Rectangle(points[0], points[1]);
-		default:
-			cout << "1 - 디폴트 생성\n";
-			cout << "2 - 점으로 생성\n";
+		default: 
+			return nullptr;
 		}
+
 	}
 }
 
-Line* ShapeManager::newLine() {
+Line* ShapeManager::newLine(int way) {
 	while (true) {
 		Point points[2];
-		switch (getOption("생성할 방법을 선택하시오: ")) {
+		switch (way) {
 		case 1:
 			return new Line;
 		case 2:
@@ -141,9 +126,8 @@ Line* ShapeManager::newLine() {
 				std::cin >> points[i].x >> points[i].y;
 			}
 			return new Line(points[0], points[1]);
-		default:
-			std::cout << "1 - 디폴트 생성\n";
-			std::cout << "2 - 점으로 생성\n";
+		default: 
+			return nullptr;
 		}
 	}
 }
@@ -151,55 +135,49 @@ Line* ShapeManager::newLine() {
 void ShapeManager::insert(Shape* a)
 {
 
-	cout << "-----------------------" << '\n';
-	cout << "도형을 만듭니다." << '\n';
-	cout << "-----------------------" << "\n\n";
-	if (a == nullptr) {
-		cout << "----------------------" << '\n';
-		cout << "도형을 만드는데 실패하였습니다.\n";
-		cout << "----------------------" << "\n\n";
+	printStatus("도형을 만듭니다");
+
+	if (nullptr == a) {
+		cout << "1 (도형) (생성 방법)\n";
+		cout << "도형		: 1 - 원, 2 - 직사각형, 3 - 삼각형, 4 - 선\n";
+		cout << "생성 방법	: default - 기본 생성, 2 - 값을 입력해서 생성\n";
+		printStatus("도형을 만드는데 실패하였습니다");
 		return;
 	}
 
 	if (nShape == capacity) {
 		capacity = capacity + 1;
-
 		shapes = new Shape * [capacity];
 	}
+
+	shapes[nShape++] = a;
 	
-	shapes[nShape] = a;
-	nShape++;
 	cout << "Capacitiy: " << capacity << '\n';
-	cout << "NUM: " << nShape << "\n\n";
+	cout << "NUM: " << nShape << '\n';
 		
-	cout << "----------------------" << '\n';
-	cout << "도형을 만드는데 성공하였습니다.\n";
-	cout << "----------------------" << "\n\n";
+	printStatus("도형을 만드는데 성공하였습니다");
 }
 
 void ShapeManager::draw() const
 {
-	cout << "-----------------------" << '\n';
-	cout << "모든 도형을 그립니다." << '\n';
-	cout << "Capacitiy: " << capacity << '\n';
-	cout << "NUM: " << nShape <<  '\n';
-	cout << "-----------------------" << "\n\n";
+	printStatus("모든 도형을 그립니다");
 
 	for (int i = 0; i < nShape; ++i) {
 		cout << "[" << i << "] ";
 		shapes[i]->draw();
 	}
-	cout << '\n';
 
-	cout << "----------------------" << '\n';
-	cout << "그리기를 마칩니다." << '\n';
-	cout << "----------------------" << "\n\n";
+	printStatus("그리기를 마칩니다");
 }
 
 void ShapeManager::deleteSpecificShape() {
-	cout << "구현 안 함\n";
+	printStatus("특정 도형을 모두 지웁니다");
+
+	printStatus("특정 도형을 모두 지웠습니다");
 }
 
 void ShapeManager::deleteNthShape() {
-	cout << "구현 안 함\n";
+	printStatus("n번째 도형을 지웁니다");
+
+	printStatus("n번째 도형을 지웠습니다");
 }

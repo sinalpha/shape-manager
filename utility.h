@@ -1,4 +1,8 @@
 #pragma once
-#include <string>
+#include <string.h>
 
-int getOption(std::string txt);
+void printStatus(std::string);
+
+void printStatus(std::string, int, int);
+
+int getOption();

@@ -15,7 +15,7 @@ public:
 	std::string shapeType{ "None" };
 	
 	Shape() { };
-	Shape(std::string shapeType) : shapeType(shapeType) { };
+	Shape(std::string shapeType) : shapeType{ shapeType } { };
 	virtual ~Shape() { };
 
 	virtual std::string save() const = 0;

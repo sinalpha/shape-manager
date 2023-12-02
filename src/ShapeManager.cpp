@@ -37,140 +37,49 @@ bool ShapeManager::action(int option) {
 	string input1, input2{};
 
 	switch (option) {
-	case 1://도형 생성
+	case CREATE_SHAPE:
 		cout << "(도형) (생성 방법): ";
 		cin >> input1 >> input2;
 		insert(selShape(input1[0] - '0', input2[0] - '0'));
 		return true;
-	case 2://도형 그리기
+	case DRAW_SHAPE:
 		draw();
 		return true;
-	case 3://특정 도형 지우기
+	case DELETE_SPEC_SHPAE:
 		cout << "어떤 도형을 지우겠습니까?: ";
 		cin >> input1;
 		deleteSpecificShape(input1);
 		return true;
-	case 4://n번째 도형 지우기
+	case DELETE_NTH_SHAPE:
 		cout << "현재 관리하고 있는 도형 - " << nShape << " 지울 도형의 위치: ";
 		cin >> input1;
 		deleteNthShape(stoi(input1));
 		return true;
-	case 5://도형 저장하기
+	case SAVE_SHAPE:
 		cout << "저장할 파일의 위치를 입력하시오: ";
 		cin >> input1;
 		save(input1);
 		return true;
-	case 6://도형 로드하기
+	case LOAD_SHAPE:
 		cout << "로드할 파일을 입력하시오: ";
 		cin >> input1;
 		load(input1);
 		return true;
-	default://도움말 출력하기
+	default:
 		return false;
 	}
 
 }
 
-Shape* ShapeManager::selShape(int shape,int way) {
 
-	switch (shape) {
-	case CIRCLE:
-		return newCircle(way);
-	case RECTANGLE:
-		return newRectangle(way);
-	case TRIANGLE:
-		return newTriangle(way);
-	case LINE:	
-		return newLine(way);
-	default: 
-		return nullptr;
-	}
-
-} 
-// To Do 지정해서 생성을 더 깔끔하게 만들기
-Triangle* ShapeManager::newTriangle(int way) const{
-
-		Point points[3];
-		switch (way) {
-		case 1:
-			return new Triangle;
-		case 2:
-			//점 3개 얻기
-			for (int i = 0; i < 3; ++i) {
-				cout << "입력 x" << i + 1 << ", y" << i + 1 << '\n';
-				cin >> points[i].x >> points[i].y;
-			}
-			return new Triangle(points[0], points[1], points[2]);
-		default: 
-			return nullptr;
-		}
-
-}
-Circle* ShapeManager::newCircle(int way) const{
-
-	while (true) {
-		Point point;
-		double r;
-		switch (way) {
-		case 1:
-			return new Circle;
-		case 2:
-			cout << "입력 x, y, r" <<  '\n';
-			cin >> point.x >> point.y >> r;
-			return new Circle(point, r);
-		default: 
-			return nullptr;
-		}
-	}
-
-}
-Rectangle* ShapeManager::newRectangle(int way) const{
-
-	while (true) {
-		Point points[2];
-		switch (way) {
-		case 1:
-			return new Rectangle;
-		case 2:
-			for (int i = 0; i < 2; ++i) {
-				cout << "입력 x" << i + 1 << ", y" << i + 1 << '\n';
-				cin >> points[i].x >> points[i].y;
-			}
-			return new Rectangle(points[0], points[1]);
-		default: 
-			return nullptr;
-		}
-	}
-
-}
-Line* ShapeManager::newLine(int way) const {
-	while (true) {
-		Point points[2];
-		switch (way) {
-		case 1:
-			return new Line;
-		case 2:
-			for (int i = 0; i < 2; ++i) {
-				std::cout << "입력 x" << i + 1 << ", y" << i + 1 << '\n';
-				std::cin >> points[i].x >> points[i].y;
-			}
-			return new Line(points[0], points[1]);
-		default: 
-			return nullptr;
-		}
-	}
-}
 void ShapeManager::insert(Shape* a)
 {
 
 	printStatus(a->shapeType + " 도형을 만듭니다");
 
-	// To Do 기능 감추기
+
 	if (nullptr == a) {
-		cout << "1 (도형) (생성 방법)\n";
-		cout << "도형		: 1 - 원, 2 - 직사각형, 3 - 삼각형, 4 - 선\n";
-		cout << "생성 방법	: default - 기본 생성, 2 - 값을 입력해서 생성\n";
-		printStatus("도형을 만드는데 실패하였습니다");
+		printStatus(insertHelp);
 		return;
 	}
 
@@ -178,9 +87,7 @@ void ShapeManager::insert(Shape* a)
 		increaseCapacity();
 	shapes[nShape] = a;
 	++nShape;
-
 	printStatus("생성 후 결과", capacity, nShape);
-	cout << "만든 도형: " << a->shapeType << '\n';
 
 	printStatus(a->shapeType + " 도형을 만드는데 성공하였습니다"s);
 
@@ -283,30 +190,21 @@ void ShapeManager::load(const string& fileName) {
 		return;
 	}
 
-	//To Do : 함수로 기능 감추기
 	int shape_type;
-	Point p[3];
-	double r;
+
 	while (in >> shape_type) {
 		switch (shape_type) {
 		case TRIANGLE:
-			for (int i = 0; i < 3; ++i)
-				in >> p[i].x >> p[i].y;
-			insert(new Triangle(p[0], p[1], p[2]));
+			insert(loadCircle(in));
 			continue;
 		case CIRCLE:
-			in >> p[0].x >> p[0].y >> r;
-			insert(new Circle(p[0], r));
+			insert(loadCircle(in));
 			continue;
 		case LINE:
-			for (int i = 0; i < 2; ++i)
-				in >> p[i].x >> p[i].y;
-			insert(new Line(p[0], p[1]));
+			insert(loadLine(in));
 			continue;
 		case RECTANGLE:
-			for (int i = 0; i < 2; ++i)
-				in >> p[i].x >> p[i].y;
-			insert(new Rectangle(p[0], p[1]));
+			insert(loadRectangle(in));
 			continue;
 		default:
 			printStatus("읽기를 실패하였습니다");

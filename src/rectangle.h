@@ -3,6 +3,7 @@
 // 
 // 2023. 11. 19		by Wulong
 // --------------------------
+#pragma once
 #include <string>
 
 #include "point.h"

@@ -6,8 +6,8 @@
 #pragma once
 #include <string>
 
-#include "point.h"						// Point를 Triangle에서 사용
-#include "shape.h"						// Shape을 상속 받음
+#include "point.h"						
+#include "shape.h"						
 
 
 class Triangle : public Shape

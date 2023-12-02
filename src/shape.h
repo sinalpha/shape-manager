@@ -19,6 +19,6 @@ public:
 	virtual ~Shape() { };
 
 	virtual std::string save() const = 0;
-	virtual void draw() const = 0;	// pure virtual function
+	virtual void draw() const = 0;	
 
 };

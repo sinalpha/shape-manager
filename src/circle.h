@@ -12,19 +12,15 @@
 
 class Circle : public Shape
 {
-	Point center;			// 중심점의 좌표
-	double rad;				// 반지름
+	Point center;			
+	double rad;				
 
 public:
 	Circle();
 	Circle(const Point&, double);
-	Circle(const Circle&);	// 깊은 복사를 할 필요가 없다면 프로그래머가 복사생성자를
-							// 프로그래밍할 필요는 없다.
-							// 만약 어떤 이유로 프로그램해야 한다면 메모리를 이해하고
-							// 코딩해야 한다
-
+	Circle(const Circle&);	
 	
-	~Circle();				// 소멸자를 프로그래밍할 필요가 없다는 것을 생각해 보자.
+	~Circle();				
 
 	std::string save() const override;
 	virtual void draw() const override;

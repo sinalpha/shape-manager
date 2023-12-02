@@ -71,7 +71,6 @@ bool ShapeManager::action(int option) {
 
 }
 
-
 void ShapeManager::insert(Shape* a)
 {
 

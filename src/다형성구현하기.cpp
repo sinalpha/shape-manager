@@ -8,8 +8,6 @@
 #include "ShapeManager.h"
 #include "utility.h"
 
-// 액션을 매직넘버를 이용해서 구현하였음.
-
 int main()
 {
 

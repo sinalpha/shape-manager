@@ -54,17 +54,17 @@ bool ShapeManager::action(int option) {
 		deleteSpecificShape(input1);
 		return true;
 	case 4://n번째 도형 지우기
-		cout << "현재 NUM - " << nShape << " 지울 도형의 위치: ";
+		cout << "현재 관리하고 있는 도형 - " << nShape << " 지울 도형의 위치: ";
 		cin >> input1;
 		deleteNthShape(stoi(input1));
 		return true;
 	case 5:
-		cout << "저장할 파일의 위치를 입력하시요: ";
+		cout << "저장할 파일의 위치를 입력하시오: ";
 		cin >> input1;
 		save(input1);
 		return true;
 	case 6:
-		cout << "로드할 파일을 입력하시요: ";
+		cout << "로드할 파일을 입력하시오: ";
 		cin >> input1;
 		load(input1);
 		return true;

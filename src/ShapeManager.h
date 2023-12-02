@@ -25,9 +25,8 @@ class ShapeManager {
 	Rectangle* newRectangle(int) const;
 	Line* newLine(int) const;
 	Shape* selShape(int, int);
-	void insert(Shape*);
+	
 	//
-	void draw() const;
 	void deleteSpecificShape(const std::string&);
 	void deleteNthShape(int);
 	void increaseCapacity();
@@ -36,6 +35,9 @@ class ShapeManager {
 
 public:
 	explicit ShapeManager(int);		
+
+	void insert(Shape*);
+	void draw() const;
 
 	~ShapeManager();
 	ShapeManager(const ShapeManager&) = default;

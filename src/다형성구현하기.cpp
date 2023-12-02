@@ -13,7 +13,7 @@
 int main()
 {
 
-	ShapeManager sm(1);
+	ShapeManager sm(100);
 
 	int option;
 	while (0 != (option = getOption()))

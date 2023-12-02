@@ -4,6 +4,8 @@
 // 2023. 11. 19		by Wulong
 // --------------------------
 #include <iostream>
+#include <string>
+#include "utility.h"
 #include "rectangle.h"
 
 Rectangle::Rectangle()
@@ -25,6 +27,15 @@ Rectangle::~Rectangle()
 {
 	std::cout << "del" << '\n';
 }
+
+std::string Rectangle::save() const {
+	return std::to_string(RECTANGLE) +
+		" " + std::to_string(p1.x) +
+		" " + std::to_string(p1.y) +
+		" " + std::to_string(p2.x) +
+		" " + std::to_string(p2.y);
+}
+
 
 void Rectangle::draw() const
 {

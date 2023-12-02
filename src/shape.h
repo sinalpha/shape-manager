@@ -5,8 +5,9 @@
 // 2023. 11. 19	by Wulong
 // --------------------------
 #pragma once
-#include <string>
 
+#include <string>
+#include <iostream>
 
 class Shape
 {
@@ -17,6 +18,7 @@ public:
 	Shape(std::string shapeType) : shapeType(shapeType) { };
 	virtual ~Shape() { };
 
+	virtual std::string save() const = 0;
 	virtual void draw() const = 0;	// pure virtual function
 
 };

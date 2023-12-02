@@ -12,6 +12,7 @@
 #include "circle.h"
 #include "rectangle.h"
 #include "line.h"
+#include "utility.h"
 
 class ShapeManager {
 	int nShape;
@@ -27,9 +28,11 @@ class ShapeManager {
 	void insert(Shape*);
 	//
 	void draw() const;
-	void deleteSpecificShape();
+	void deleteSpecificShape(std::string);
 	void deleteNthShape(int);
 	void increaseCapacity();
+	void save() const;
+	void load();
 
 public:
 	explicit ShapeManager(int);		

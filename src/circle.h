@@ -4,7 +4,8 @@
 // 
 // 2023. 11. 19		by Wulong
 // --------------------------
-#pragma once
+#include <string>
+
 #include "point.h"
 #include "shape.h"
 
@@ -24,5 +25,6 @@ public:
 	
 	~Circle();				// 소멸자를 프로그래밍할 필요가 없다는 것을 생각해 보자.
 
+	std::string save() const override;
 	virtual void draw() const override;
 };

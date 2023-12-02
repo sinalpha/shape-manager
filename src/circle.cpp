@@ -1,5 +1,7 @@
 #include <iostream>
+#include <string>
 #include "circle.h"
+#include "utility.h"
 
 Circle::Circle()
 	: center(), rad(0.0), Shape{ "Circle" }
@@ -22,6 +24,14 @@ Circle::Circle(const Circle& other)
 Circle::~Circle()
 {
 	std::cout << "del" << '\n';
+}
+
+std::string Circle::save() const
+{
+	return std::to_string(CIRCLE) +
+		" " + std::to_string(center.x) +
+		" " + std::to_string(center.y) +
+		" " + std::to_string(rad);
 }
 
 void Circle::draw() const

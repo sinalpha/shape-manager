@@ -3,6 +3,8 @@
 // 
 // 2023. 11. 19		by Wulong
 // --------------------------
+#include <string>
+
 #include "point.h"
 #include "shape.h"
 
@@ -16,5 +18,7 @@ public:
 	Rectangle(const Rectangle&);
 	~Rectangle();
 
+	std::string save() const override;
 	virtual void draw() const override;
+	
 };

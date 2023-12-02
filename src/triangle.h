@@ -3,8 +3,11 @@
 // 
 // 2023. 11. 19		by Wulong
 // --------------------------
+#include <string>
+
 #include "point.h"						// Point를 Triangle에서 사용
 #include "shape.h"						// Shape을 상속 받음
+
 
 class Triangle : public Shape
 {
@@ -16,6 +19,7 @@ public:
 	Triangle(const Triangle&);
 	~Triangle();
 
+	std::string save() const override;
 	virtual void draw() const override;	
 };
 

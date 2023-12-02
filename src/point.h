@@ -4,7 +4,7 @@
 // 
 // 2023. 11. 19	by Wulong
 // --------------------------
-#pragma once	// 만약에 vs 2022에서만 컴파일한다고 하면은 #pragma once은 #ifndef _Point ... #endif와 완전히 같은 뜻인가?
+#pragma once	
 
 struct Point
 {

@@ -55,10 +55,14 @@ bool ShapeManager::action(int option) {
 		deleteNthShape(input1[0] - '0');
 		return true;
 	case 5:
-		save();
+		cout << "저장할 파일의 위치를 입력하시요: ";
+		cin >> input1;
+		save(input1);
 		return true;
 	case 6:
-		load();
+		cout << "로드할 파일을 입력하시요: ";
+		cin >> input1;
+		load(input1);
 		return true;
 	default:
 		return false;
@@ -236,7 +240,6 @@ void ShapeManager::deleteNthShape(int n) {
 
 	printStatus(char(n + '0') + "번째 도형을 지웠습니다"s);
 }
-
 void ShapeManager::increaseCapacity() {
 	printStatus("수용 용량을 늘립니다.");
 	Shape** temp = shapes;
@@ -245,26 +248,25 @@ void ShapeManager::increaseCapacity() {
 	memcpy(shapes, temp, sizeof(Shape*) * nShape);
 	delete[] temp;
 }
+void ShapeManager::save(string fileName) const {
 
-void ShapeManager::save() const {
+	printStatus("모든 도형을 " + fileName + "에 저장합니다");
 
-	ofstream out{ "shapes.dat" };
+	ofstream out{ fileName };
 
-	printStatus("모든 도형을 shapes.dat에 저장합니다");
 
 	for (int i = 0; i < nShape; ++i)
 		out << shapes[i]->save() + " ";
 
-	printStatus("모든 도형을 shapes.dat에 저장을 하였습니다");
+	printStatus("모든 도형을 " + fileName + "에 저장을 하였습니다");
 
 }
+void ShapeManager::load(string fileName) {
+	printStatus(fileName + "에서 읽기를 시작합니다");
 
-void ShapeManager::load() {
-	printStatus("shapes.dat에서 읽기를 시작합니다");
-
-	ifstream in{ "shapes.dat" };
+	ifstream in{ fileName };
 	if (not in) {
-		printStatus("shapes.dat가 존재하지 않습니다");
+		printStatus(fileName + "가 존재하지 않습니다");
 		return;
 	}
 
@@ -298,7 +300,7 @@ void ShapeManager::load() {
 		}
 	}
 
-
+	printStatus("읽기를 성공적으로 마쳤습니다");
 }
 
 

@@ -7,6 +7,8 @@
 #include "line.h"
 #include "shape.h"
 
+
+//도형 생성 관련 유틸
 Shape* selShape(int shape, int way) {
 
 	switch (shape) {
@@ -42,6 +44,7 @@ Triangle* newTriangle(int way) {
 	}
 
 }
+
 Circle* newCircle(int way) {
 
 	while (true) {
@@ -60,6 +63,7 @@ Circle* newCircle(int way) {
 	}
 
 }
+
 Rectangle* newRectangle(int way){
 
 	while (true) {
@@ -79,6 +83,7 @@ Rectangle* newRectangle(int way){
 	}
 
 }
+
 Line* newLine(int way){
 	while (true) {
 		Point points[2];
@@ -133,6 +138,7 @@ Triangle* loadTriangle(std::ifstream& in) {
 	return new Triangle(p[0], p[1], p[2]);
 }
 
+//
 void printStatus(const std::string& status) {
 	std::cout << "--------------------------------------" << '\n';
 	std::cout << status << '\n';

@@ -16,7 +16,7 @@ int main()
 	ShapeManager sm(100);
 
 	int option;
-	while (0 != (option = getOption()))
+	while (END != (option = getOption()))
 		if (not sm.action(option))
 			printStatus(help);
 }

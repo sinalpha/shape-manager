@@ -112,7 +112,7 @@ Rectangle* loadRectangle(std::ifstream& in) {
 	for (int i = 0; i < 2; ++i)
 		in >> p[i].x >> p[i].y;
 
-	new Rectangle(p[0], p[1]);
+	return new Rectangle(p[0], p[1]);
 }
 
 Line* loadLine(std::ifstream& in) {

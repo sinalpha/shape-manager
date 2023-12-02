@@ -33,10 +33,10 @@ Triangle* newTriangle(int);
 Circle* newCircle(int);
 Rectangle* newRectangle(int);
 Line* newLine(int);
-Circle* loadCircle(const std::istream&);
-Rectangle* loadRectangle(const std::istream&);
-Line* loadLine(const std::istream&);
-Triangle* loadTriangle(const std::istream&);
+Circle* loadCircle(std::ifstream&);
+Rectangle* loadRectangle(std::ifstream&);
+Line* loadLine(std::ifstream&);
+Triangle* loadTriangle(std::ifstream&);
 
 void printStatus(const std::string&);
 void printStatus(const std::string&, int, int);

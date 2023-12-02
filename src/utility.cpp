@@ -10,7 +10,7 @@ void printStatus(const std::string status) {
 
 void printStatus(const std::string status, int capacity, int nShape) {
 	std::cout << "-----------------------" << '\n';
-	std::cout << "모든 도형을 그립니다." << '\n';
+	std::cout << status << '\n';
 	std::cout << "Capacitiy: " << capacity << '\n';
 	std::cout << "NUM: " << nShape << '\n';
 	std::cout << "-----------------------" << '\n';
@@ -27,4 +27,15 @@ int getOption() {
 		return 5;
 }
 
-
+int stringToInt(const std::string str) {
+	if (str == "Triangle")
+		return TRIANGLE;
+	else if (str == "Circle")
+		return CIRCLE;
+	else if (str == "Line")
+		return LINE;
+	else if (str == "Rectangle")
+		return RECTANGLE;
+	else
+		return 0;
+}		

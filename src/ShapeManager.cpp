@@ -1,5 +1,5 @@
 // --------------------------
-// ShapeManger.cpp	The class managing several Shapes
+// ShapeManger.cpp	도형을 관리하는 클래스
 // 
 // 2023. 11. 19		by Wulong
 // --------------------------
@@ -29,17 +29,21 @@ ShapeManager::~ShapeManager()
 bool ShapeManager::action(int option) {
 	string input1, input2{};
 	switch (option) {
-	case 1:
+	case 1://도형 생성
 		cout << "(도형) (생성 방법): ";
 		cin >> input1 >> input2;
 		insert(selShape(input1[0] - '0', input2[0] - '0'));
 		return true;
-	case 2: draw();
+	case 2://도형 그리기
+		draw();
 		return true;
-	case 3: deleteSpecificShape();
+	case 3://특정 도형 지우기
+		cout << "어떤 도형을 지우겠습니까?: ";
+		cin >> input1;
+		deleteSpecificShape(stringToInt(input1));
 		return true;
-	case 4:
-		cout << "현재 NUM - " << nShape << "";
+	case 4://n번째 도형 지우기
+		cout << "현재 NUM - " << nShape << " 지울 도형의 위치: ";
 		cin >> input1;
 		deleteNthShape(input1[0] - '0');
 		return true;
@@ -50,20 +54,20 @@ bool ShapeManager::action(int option) {
 
 Shape* ShapeManager::selShape(int shape,int way) {
 	switch (shape) {
-	case 1:
+	case CIRCLE:
 		return newCircle(way);
-	case 2:
+	case RECTANGLE:
 		return newRectangle(way);
-	case 3:
+	case TRIANGLE:
 		return newTriangle(way);
-	case 4:	
+	case LINE:	
 		return newLine(way);
 	default: 
 		return nullptr;
 	}
 	
 } 
-Triangle* ShapeManager::newTriangle(int way) {
+Triangle* ShapeManager::newTriangle(int way) const{
 		Point points[3];
 		switch (way) {
 		case 1:
@@ -79,7 +83,7 @@ Triangle* ShapeManager::newTriangle(int way) {
 			return nullptr;
 		}
 }
-Circle* ShapeManager::newCircle(int way) {
+Circle* ShapeManager::newCircle(int way) const{
 	
 	while (true) {
 		Point point;
@@ -96,7 +100,7 @@ Circle* ShapeManager::newCircle(int way) {
 		}
 	}
 }
-Rectangle* ShapeManager::newRectangle(int way) {
+Rectangle* ShapeManager::newRectangle(int way) const{
 	
 	while (true) {
 		Point points[2];
@@ -115,7 +119,7 @@ Rectangle* ShapeManager::newRectangle(int way) {
 
 	}
 }
-Line* ShapeManager::newLine(int way) {
+Line* ShapeManager::newLine(int way) const {
 	while (true) {
 		Point points[2];
 		switch (way) {
@@ -145,16 +149,8 @@ void ShapeManager::insert(Shape* a)
 		return;
 	}
 
-	if (nShape == capacity) {
-		printStatus("수용 용량을 늘립니다.");
-		Shape** temp = shapes;
-		capacity = capacity * 2;
-		shapes = new Shape*[capacity];
-		memcpy(shapes, temp, sizeof(Shape*) * nShape);
-		delete[] temp;  
-	}
-
-
+	if (nShape == capacity)
+		increaseCapacity();
 	shapes[nShape] = a;
 	++nShape;
 
@@ -181,15 +177,29 @@ void ShapeManager::deleteSpecificShape() {
 	printStatus("특정 도형을 모두 지웠습니다");
 }
 void ShapeManager::deleteNthShape(int n) {
-	printStatus("n번째 도형을 지웁니다");
-	if (0 < nShape or nShape - 1 < n) {
-		printStatus("잘 못된 숫자를 입력하였습니다", capacity, nShape);
+	printStatus(char(n + '0') + "번째 도형을 지웁니다"s);
+	
+	if (0 >= nShape or nShape < n) {
+		printStatus("잘못된 숫자를 입력하였습니다", capacity, nShape);
 		return;
 	}
 	
-	
+	delete shapes[n - 1];
+	//memcpy로 개선가능
+	for (int i = n - 1; i < nShape - 1; ++i)
+		shapes[i] = shapes[i + 1];
+	--nShape;
 
-	printStatus("n번째 도형을 지웠습니다");
+	printStatus(char(n + '0') + "번째 도형을 지웠습니다"s);
+}
+
+void ShapeManager::increaseCapacity() {
+	printStatus("수용 용량을 늘립니다.");
+	Shape** temp = shapes;
+	capacity = capacity * 2;
+	shapes = new Shape * [capacity];
+	memcpy(shapes, temp, sizeof(Shape*) * nShape);
+	delete[] temp;
 }
 
 

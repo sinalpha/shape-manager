@@ -10,6 +10,8 @@
 #include "ShapeManager.h"
 #include "utility.h"
 
+
+
 int main()
 {
 	ShapeManager sm(1);

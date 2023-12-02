@@ -19,17 +19,17 @@ class ShapeManager {
 	Shape** shapes;
 
 	// 도형을 생성할 때 쓰는 함수
-	Triangle* newTriangle(int);
-	Circle* newCircle(int);
-	Rectangle* newRectangle(int);
-	Line* newLine(int);
+	Triangle* newTriangle(int) const;
+	Circle* newCircle(int) const;
+	Rectangle* newRectangle(int) const;
+	Line* newLine(int) const;
 	Shape* selShape(int, int);
 	void insert(Shape*);
 	//
 	void draw() const;
 	void deleteSpecificShape();
 	void deleteNthShape(int);
-	void increaseCapacity(Shape**);
+	void increaseCapacity();
 
 public:
 	explicit ShapeManager(int);		

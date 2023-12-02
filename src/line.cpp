@@ -5,12 +5,12 @@
 #include "line.h"
 
 Line::Line()
-	: st{}, ed{}, Shape{ "Line" }
+	: st{}, ed{}, Shape{ "¼±" }
 {
 }
 
 Line::Line(const Point& p1, const Point& p2) 
-	: st{p1}, ed{p2}, Shape{"Line"}
+	: st{p1}, ed{p2}, Shape{"¼±"}
 {
 }
 
@@ -26,6 +26,6 @@ std::string Line::save() const {
 }
 
 void Line::draw() const {
-	std::cout << "Line - (" << st.x << "," << st.y << "), ("
+	std::cout << "¼± - (" << st.x << "," << st.y << "), ("
 		<< ed.x << "," << ed.y << ")" << "\n";
 }

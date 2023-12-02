@@ -11,8 +11,8 @@ void printStatus(const std::string status) {
 void printStatus(const std::string status, int capacity, int nShape) {
 	std::cout << "---------------------------------------" << '\n';
 	std::cout << status << '\n';
-	std::cout << "Capacitiy: " << capacity << '\n';
-	std::cout << "NUM: " << nShape << '\n';
+	std::cout << "최대 " << capacity << "개의 도형을 담을 수 있습니다" << '\n';
+	std::cout << "모두 " << nShape << "개의 도형이 있습니다" << '\n';
 	std::cout << "---------------------------------------" << '\n';
 }
 

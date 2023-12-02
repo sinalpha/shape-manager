@@ -14,6 +14,9 @@ using namespace std;
 
 ShapeManager::ShapeManager(int n)
 {
+	for (int i = 0; i < 10; ++i)
+		cout << "이상한 문자 입력하지 마세요 ㅡㅡ;(필수 기능만 구현함)\n";
+
 	printStatus("관리를 시작합니다");
 
 	nShape = 0;			
@@ -94,7 +97,7 @@ Triangle* ShapeManager::newTriangle(int way) const{
 		case 2:
 			//점 3개 얻기
 			for (int i = 0; i < 3; ++i) {
-				cout << "input x" << i + 1 << ", y" << i + 1 << '\n';
+				cout << "입력 x" << i + 1 << ", y" << i + 1 << '\n';
 				cin >> points[i].x >> points[i].y;
 			}
 			return new Triangle(points[0], points[1], points[2]);
@@ -111,7 +114,7 @@ Circle* ShapeManager::newCircle(int way) const{
 		case 1:
 			return new Circle;
 		case 2:
-			cout << "input x, y, r" <<  '\n';
+			cout << "입력 x, y, r" <<  '\n';
 			cin >> point.x >> point.y >> r;
 			return new Circle(point, r);
 		default: 
@@ -128,7 +131,7 @@ Rectangle* ShapeManager::newRectangle(int way) const{
 			return new Rectangle;
 		case 2:
 			for (int i = 0; i < 2; ++i) {
-				cout << "input x" << i + 1 << ", y" << i + 1 << '\n';
+				cout << "입력 x" << i + 1 << ", y" << i + 1 << '\n';
 				cin >> points[i].x >> points[i].y;
 			}
 			return new Rectangle(points[0], points[1]);
@@ -146,7 +149,7 @@ Line* ShapeManager::newLine(int way) const {
 			return new Line;
 		case 2:
 			for (int i = 0; i < 2; ++i) {
-				std::cout << "input x" << i + 1 << ", y" << i + 1 << '\n';
+				std::cout << "입력 x" << i + 1 << ", y" << i + 1 << '\n';
 				std::cin >> points[i].x >> points[i].y;
 			}
 			return new Line(points[0], points[1]);
@@ -173,15 +176,14 @@ void ShapeManager::insert(Shape* a)
 	shapes[nShape] = a;
 	++nShape;
 
-	cout << "Capacitiy: " << capacity << '\n';
-	cout << "NUM: " << nShape << '\n';
-	cout << "Gened Shape: " << a->shapeType << '\n';
+	printStatus("생성 후 결과", capacity, nShape);
+	cout << "만든 도형: " << a->shapeType << '\n';
 
 	printStatus(a->shapeType + " 도형을 만드는데 성공하였습니다"s);
 }
 void ShapeManager::draw() const
 {
-	printStatus("모든 도형을 그립니다");
+	printStatus("관리하는 모든 도형을 그립니다", capacity, nShape);
 
 	for (int i = 0; i < nShape; ++i) {
 		cout << "[" << i << "] ";
@@ -190,36 +192,35 @@ void ShapeManager::draw() const
 
 	printStatus("그리기를 마칩니다");
 }
-void ShapeManager::deleteSpecificShape(string type) {
-	printStatus(type + "도형을 모두 지웁니다");
+void ShapeManager::deleteSpecificShape(const string& type) {
+	printStatus(type + "을 모두 지웁니다");
 
 	//비효율적으로 지우고 있으니 나중에 개선해야함
 
-	int preNShape = nShape;
 	for (int i = 0; i < nShape; ++i) {
-		if (type == "Triangle")
+		if (type == "삼각형")
 			if (dynamic_cast<Triangle*>(shapes[i])) {
 				deleteNthShape(i + 1);
 				i = -1;
 			}
-		if (type == "Circle")
+		if (type == "원")
 			if (dynamic_cast<Circle*>(shapes[i])) {
 				deleteNthShape(i + 1);
 				i = -1;
 			}
-		if (type == "Rectangle")
+		if (type == "사각형")
 			if (dynamic_cast<Rectangle*>(shapes[i])) {
 				deleteNthShape(i + 1);
 				i = -1;
 			}
-		if (type == "Line")
+		if (type == "선")
 			if (dynamic_cast<Line*>(shapes[i])) {
 				deleteNthShape(i + 1);
 				i = -1;
 			}
 	}
 
-	printStatus(type + "도형을 모두 지웠습니다");
+	printStatus(type + "을 모두 지웠습니다");
 }
 void ShapeManager::deleteNthShape(int n) {
 	printStatus(to_string(n) + "번째 도형을 지웁니다"s);
@@ -247,7 +248,7 @@ void ShapeManager::increaseCapacity() {
 	memcpy(shapes, temp, sizeof(Shape*) * nShape);
 	delete[] temp;
 }
-void ShapeManager::save(string fileName) const {
+void ShapeManager::save(const string& fileName) const {
 
 	printStatus("모든 도형을 " + fileName + "에 저장합니다");
 
@@ -260,7 +261,7 @@ void ShapeManager::save(string fileName) const {
 	printStatus("모든 도형을 " + fileName + "에 저장을 하였습니다");
 
 }
-void ShapeManager::load(string fileName) {
+void ShapeManager::load(const string& fileName) {
 	printStatus(fileName + "에서 읽기를 시작합니다");
 
 	ifstream in{ fileName };

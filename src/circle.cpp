@@ -4,12 +4,12 @@
 #include "utility.h"
 
 Circle::Circle()
-	: center(), rad(0.0), Shape{ "Circle" }
+	: center(), rad(0.0), Shape{ "원" }
 {
 }
 
 Circle::Circle(const Point& c, double r)
-	: center(c), rad(r), Shape{"Circle"}
+	: center(c), rad(r), Shape{"원"}
 {
 }
 
@@ -35,7 +35,7 @@ std::string Circle::save() const
 
 void Circle::draw() const
 {
-	std::cout << "Circle - center(" << center.x << "," << center.y
-		<< ") radius " << rad << '\n';
+	std::cout << "원 - 중심점(" << center.x << "," << center.y
+		<< ") 반지름 " << rad << '\n';
 }
 

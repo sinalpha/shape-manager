@@ -28,11 +28,11 @@ class ShapeManager {
 	void insert(Shape*);
 	//
 	void draw() const;
-	void deleteSpecificShape(std::string);
+	void deleteSpecificShape(const std::string&);
 	void deleteNthShape(int);
 	void increaseCapacity();
-	void save(std::string) const;
-	void load(std::string);
+	void save(const std::string&) const;
+	void load(const std::string&);
 
 public:
 	explicit ShapeManager(int);		

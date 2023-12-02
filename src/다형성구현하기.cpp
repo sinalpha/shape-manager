@@ -5,8 +5,6 @@
 //		- C++에서 다형성을 어떻게 구현하는가?
 // 2023. 11. 19.	by Wulong
 //----------------------------------------------
-#include <iostream>
-
 #include "ShapeManager.h"
 #include "utility.h"
 
@@ -14,6 +12,7 @@
 
 int main()
 {
+
 	ShapeManager sm(1);
 
 	int option;

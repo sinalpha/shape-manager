@@ -15,7 +15,7 @@ using namespace std;
 ShapeManager::ShapeManager(int n)
 {
 	for (int i = 0; i < 10; ++i)
-		cout << "이상한 문자 입력하지 마세요 ㅡㅡ;(필수 기능만 구현함)\n";
+		cout << "무작위로 입력하지 마세요 ㅡㅡ;(필수 기능만 구현함)\n";
 
 	printStatus("관리를 시작합니다");
 

@@ -41,11 +41,6 @@ bool ShapeManager::action(int option) {
 		insert(selShape(input1[0] - '0', input2[0] - '0'));
 		return true;
 	case 2://도형 그리기
-		if (nShape <= 0)
-		{
-			printStatus("그릴 도형이 없습니다");
-			return true;
-		}
 		draw();
 		return true;
 	case 3://특정 도형 지우기
@@ -58,22 +53,21 @@ bool ShapeManager::action(int option) {
 		cin >> input1;
 		deleteNthShape(stoi(input1));
 		return true;
-	case 5:
+	case 5://도형 저장하기
 		cout << "저장할 파일의 위치를 입력하시오: ";
 		cin >> input1;
 		save(input1);
 		return true;
-	case 6:
+	case 6://도형 로드하기
 		cout << "로드할 파일을 입력하시오: ";
 		cin >> input1;
 		load(input1);
 		return true;
-	default:
+	default://도움말 출력하기
 		return false;
 	}
 }
 
-//private함수
 Shape* ShapeManager::selShape(int shape,int way) {
 	switch (shape) {
 	case CIRCLE:
@@ -163,6 +157,7 @@ void ShapeManager::insert(Shape* a)
 
 	printStatus(a->shapeType + " 도형을 만듭니다");
 
+	// To Do 기능 감추기
 	if (nullptr == a) {
 		cout << "1 (도형) (생성 방법)\n";
 		cout << "도형		: 1 - 원, 2 - 직사각형, 3 - 삼각형, 4 - 선\n";
@@ -185,8 +180,11 @@ void ShapeManager::draw() const
 {
 	printStatus("관리하는 모든 도형을 그립니다", capacity, nShape);
 
+	if (nShape <= 0)
+		printStatus("그릴 도형이 없습니다");
+
 	for (int i = 0; i < nShape; ++i) {
-		cout << "[" << i << "] ";
+		cout << "[" << i << "]  ";
 		shapes[i]->draw();
 	}
 
@@ -195,8 +193,7 @@ void ShapeManager::draw() const
 void ShapeManager::deleteSpecificShape(const string& type) {
 	printStatus(type + "을 모두 지웁니다");
 
-	//비효율적으로 지우고 있으니 나중에 개선해야함
-
+	// To Do O(n)으로 지우기
 	for (int i = 0; i < nShape; ++i) {
 		if (type == "삼각형")
 			if (dynamic_cast<Triangle*>(shapes[i])) {
@@ -233,7 +230,7 @@ void ShapeManager::deleteNthShape(int n) {
 	int idx = n - 1;
 	
 	delete shapes[idx];
-	//memcpy로 개선가능
+	// To Do memcpy로 개선가능
 	for (int i = idx; i < nShape - 1; ++i)
 		shapes[i] = shapes[i + 1];
 	--nShape;
@@ -270,6 +267,7 @@ void ShapeManager::load(const string& fileName) {
 		return;
 	}
 
+	//To Do : 함수로 기능 감추기
 	int shape_type;
 	Point p[3];
 	double r;

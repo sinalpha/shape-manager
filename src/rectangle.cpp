@@ -25,7 +25,6 @@ Rectangle::Rectangle(const Rectangle& other)
 
 Rectangle::~Rectangle()
 {
-	std::cout << "del" << '\n';
 }
 
 std::string Rectangle::save() const {

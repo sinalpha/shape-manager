@@ -14,6 +14,9 @@ Line::Line(const Point& p1, const Point& p2)
 {
 }
 
+Line::~Line() {
+}
+
 std::string Line::save() const {
 	return std::to_string(LINE) +
 		" " + std::to_string(st.x) +

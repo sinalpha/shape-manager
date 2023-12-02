@@ -24,7 +24,7 @@ int getOption() {
 	if (isdigit(option[0]))
 		return option[0] - '0';
 	else
-		return 5;
+		return 9;
 }
 
 int stringToInt(const std::string str) {

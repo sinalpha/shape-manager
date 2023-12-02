@@ -23,7 +23,6 @@ Circle::Circle(const Circle& other)
 
 Circle::~Circle()
 {
-	std::cout << "del" << '\n';
 }
 
 std::string Circle::save() const

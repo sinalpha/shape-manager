@@ -12,6 +12,8 @@ public:
 	Line();
 	Line(const Point&, const Point&);
 
+	~Line();
+
 	std::string save() const override;
 	virtual void draw() const override;
 };

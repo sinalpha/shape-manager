@@ -5,6 +5,7 @@
 // --------------------------
 #include <iostream>
 #include <fstream>
+#include <string>
 
 #include "shapeManager.h"
 #include "utility.h"
@@ -52,7 +53,7 @@ bool ShapeManager::action(int option) {
 	case 4://n번째 도형 지우기
 		cout << "현재 NUM - " << nShape << " 지울 도형의 위치: ";
 		cin >> input1;
-		deleteNthShape(input1[0] - '0');
+		deleteNthShape(stoi(input1));
 		return true;
 	case 5:
 		cout << "저장할 파일의 위치를 입력하시요: ";
@@ -69,6 +70,7 @@ bool ShapeManager::action(int option) {
 	}
 }
 
+//private함수
 Shape* ShapeManager::selShape(int shape,int way) {
 	switch (shape) {
 	case CIRCLE:
@@ -191,54 +193,51 @@ void ShapeManager::draw() const
 void ShapeManager::deleteSpecificShape(string type) {
 	printStatus(type + "도형을 모두 지웁니다");
 
-
-	//이상한 입력에 대응을 못 하지만...
-	//이름으로 해결할 수 있지만...
-	//괴랄한 코드이지만...
-	//비효율적이지만...
+	//비효율적으로 지우고 있으니 나중에 개선해야함
 
 	int preNShape = nShape;
 	for (int i = 0; i < nShape; ++i) {
 		if (type == "Triangle")
 			if (dynamic_cast<Triangle*>(shapes[i])) {
 				deleteNthShape(i + 1);
-				i = 0;
+				i = -1;
 			}
 		if (type == "Circle")
 			if (dynamic_cast<Circle*>(shapes[i])) {
 				deleteNthShape(i + 1);
-				i = 0;
+				i = -1;
 			}
 		if (type == "Rectangle")
 			if (dynamic_cast<Rectangle*>(shapes[i])) {
 				deleteNthShape(i + 1);
-				i = 0;
+				i = -1;
 			}
 		if (type == "Line")
 			if (dynamic_cast<Line*>(shapes[i])) {
 				deleteNthShape(i + 1);
-				i = 0;
+				i = -1;
 			}
-		
 	}
 
 	printStatus(type + "도형을 모두 지웠습니다");
 }
 void ShapeManager::deleteNthShape(int n) {
-	printStatus(char(n + '0') + "번째 도형을 지웁니다"s);
-	
-	if (0 >= nShape or nShape < n) {
+	printStatus(to_string(n) + "번째 도형을 지웁니다"s);
+
+	if (0 >= n or nShape < n) {
 		printStatus("잘못된 숫자를 입력하였습니다", capacity, nShape);
 		return;
 	}
+
+	int idx = n - 1;
 	
-	delete shapes[n - 1];
+	delete shapes[idx];
 	//memcpy로 개선가능
-	for (int i = n - 1; i < nShape - 1; ++i)
+	for (int i = idx; i < nShape - 1; ++i)
 		shapes[i] = shapes[i + 1];
 	--nShape;
 
-	printStatus(char(n + '0') + "번째 도형을 지웠습니다"s);
+	printStatus(to_string(n) + "번째 도형을 지웠습니다"s);
 }
 void ShapeManager::increaseCapacity() {
 	printStatus("수용 용량을 늘립니다.");

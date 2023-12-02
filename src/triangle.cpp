@@ -25,7 +25,6 @@ Triangle::Triangle(const Triangle& other)
 
 Triangle::~Triangle()
 {
-	std::cout << "del" << '\n';
 }
 
 std::string Triangle::save() const {

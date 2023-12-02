@@ -33,7 +33,9 @@ ShapeManager::~ShapeManager()
 	printStatus("관리를 종료합니다");
 }
 bool ShapeManager::action(int option) {
+
 	string input1, input2{};
+
 	switch (option) {
 	case 1://도형 생성
 		cout << "(도형) (생성 방법): ";
@@ -66,9 +68,11 @@ bool ShapeManager::action(int option) {
 	default://도움말 출력하기
 		return false;
 	}
+
 }
 
 Shape* ShapeManager::selShape(int shape,int way) {
+
 	switch (shape) {
 	case CIRCLE:
 		return newCircle(way);
@@ -81,9 +85,11 @@ Shape* ShapeManager::selShape(int shape,int way) {
 	default: 
 		return nullptr;
 	}
-	
+
 } 
+// To Do 지정해서 생성을 더 깔끔하게 만들기
 Triangle* ShapeManager::newTriangle(int way) const{
+
 		Point points[3];
 		switch (way) {
 		case 1:
@@ -98,9 +104,10 @@ Triangle* ShapeManager::newTriangle(int way) const{
 		default: 
 			return nullptr;
 		}
+
 }
 Circle* ShapeManager::newCircle(int way) const{
-	
+
 	while (true) {
 		Point point;
 		double r;
@@ -115,9 +122,10 @@ Circle* ShapeManager::newCircle(int way) const{
 			return nullptr;
 		}
 	}
+
 }
 Rectangle* ShapeManager::newRectangle(int way) const{
-	
+
 	while (true) {
 		Point points[2];
 		switch (way) {
@@ -132,8 +140,8 @@ Rectangle* ShapeManager::newRectangle(int way) const{
 		default: 
 			return nullptr;
 		}
-
 	}
+
 }
 Line* ShapeManager::newLine(int way) const {
 	while (true) {
@@ -175,9 +183,11 @@ void ShapeManager::insert(Shape* a)
 	cout << "만든 도형: " << a->shapeType << '\n';
 
 	printStatus(a->shapeType + " 도형을 만드는데 성공하였습니다"s);
+
 }
 void ShapeManager::draw() const
 {
+
 	printStatus("관리하는 모든 도형을 그립니다", capacity, nShape);
 
 	if (nShape <= 0)
@@ -189,8 +199,10 @@ void ShapeManager::draw() const
 	}
 
 	printStatus("그리기를 마칩니다");
+
 }
 void ShapeManager::deleteSpecificShape(const string& type) {
+
 	printStatus(type + "을 모두 지웁니다");
 
 	// To Do O(n)으로 지우기
@@ -218,8 +230,10 @@ void ShapeManager::deleteSpecificShape(const string& type) {
 	}
 
 	printStatus(type + "을 모두 지웠습니다");
+
 }
 void ShapeManager::deleteNthShape(int n) {
+
 	printStatus(to_string(n) + "번째 도형을 지웁니다"s);
 
 	if (0 >= n or nShape < n) {
@@ -228,7 +242,6 @@ void ShapeManager::deleteNthShape(int n) {
 	}
 
 	int idx = n - 1;
-	
 	delete shapes[idx];
 	// To Do memcpy로 개선가능
 	for (int i = idx; i < nShape - 1; ++i)
@@ -236,22 +249,24 @@ void ShapeManager::deleteNthShape(int n) {
 	--nShape;
 
 	printStatus(to_string(n) + "번째 도형을 지웠습니다"s);
+
 }
 void ShapeManager::increaseCapacity() {
+
 	printStatus("수용 용량을 늘립니다.");
+
 	Shape** temp = shapes;
 	capacity = capacity * 2;
 	shapes = new Shape * [capacity];
 	memcpy(shapes, temp, sizeof(Shape*) * nShape);
 	delete[] temp;
+
 }
 void ShapeManager::save(const string& fileName) const {
 
 	printStatus("모든 도형을 " + fileName + "에 저장합니다");
 
 	ofstream out{ fileName };
-
-
 	for (int i = 0; i < nShape; ++i)
 		out << shapes[i]->save() + " ";
 
@@ -259,6 +274,7 @@ void ShapeManager::save(const string& fileName) const {
 
 }
 void ShapeManager::load(const string& fileName) {
+
 	printStatus(fileName + "에서 읽기를 시작합니다");
 
 	ifstream in{ fileName };
@@ -299,6 +315,7 @@ void ShapeManager::load(const string& fileName) {
 	}
 
 	printStatus("읽기를 성공적으로 마쳤습니다");
+
 }
 
 

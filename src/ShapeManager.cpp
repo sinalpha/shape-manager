@@ -32,37 +32,25 @@ ShapeManager::~ShapeManager()
 
 	printStatus("관리를 종료합니다");
 }
-bool ShapeManager::action(int option) {
-
-	string input1, input2{};
+bool ShapeManager::action(int option, const string& input1, Shape* shape) {
 
 	switch (option) {
 	case CREATE_SHAPE:
-		cout << "(도형) (생성 방법): ";
-		cin >> input1 >> input2;
-		insert(selShape(input1[0] - '0', input2[0] - '0'));
+		insert(shape);
 		return true;
 	case DRAW_SHAPE:
 		draw();
 		return true;
 	case DELETE_SPEC_SHPAE:
-		cout << "어떤 도형을 지우겠습니까?: ";
-		cin >> input1;
 		deleteSpecificShape(input1);
 		return true;
 	case DELETE_NTH_SHAPE:
-		cout << "현재 관리하고 있는 도형 - " << nShape << " 지울 도형의 위치: ";
-		cin >> input1;
 		deleteNthShape(stoi(input1));
 		return true;
 	case SAVE_SHAPE:
-		cout << "저장할 파일의 위치를 입력하시오: ";
-		cin >> input1;
 		save(input1);
 		return true;
 	case LOAD_SHAPE:
-		cout << "로드할 파일을 입력하시오: ";
-		cin >> input1;
 		load(input1);
 		return true;
 	default:
@@ -75,7 +63,7 @@ void ShapeManager::insert(Shape* a)
 {
 
 	if (nullptr == a) {
-		printStatus(insertHelp);
+		printStatus("도형을 만드는데 실패하였습니다");
 		return;
 	}
 
@@ -83,6 +71,7 @@ void ShapeManager::insert(Shape* a)
 
 	if (nShape == capacity)
 		increaseCapacity();
+	
 	shapes[nShape] = a;
 	++nShape;
 	printStatus("생성 후 결과", capacity, nShape);

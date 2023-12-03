@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 #include "utility.h"
 #include "circle.h"
@@ -137,6 +138,31 @@ Triangle* loadTriangle(std::ifstream& in) {
 	return new Triangle(p[0], p[1], p[2]);
 }
 
+bool checkIsDigit(const std::string& str) {
+
+	for (int i = 0; i < str.size(); ++i)
+		if (!iswdigit(str[i]))
+			return false;
+
+	return true;
+}
+
+bool checkIsAlpha(const std::string& str) {
+	
+	for (int i = 0; i < str.size(); ++i)
+		if (!iswalpha(str[i]))
+			return false;
+	return true;
+}
+
+bool checkInput(const std::string& str) {
+	
+	if (checkIsAlpha(str) and checkIsDigit(str))
+		return false;
+
+	return true;
+}
+
 void printStatus(const std::string& status) {
 	std::cout << "--------------------------------------" << '\n';
 	std::cout << status << '\n';
@@ -155,8 +181,8 @@ int getOption() {
 	std::cout << "할 행동을 선택하시오 Help - 9: ";
 	std::string option{};
 	std::cin >> option;
-
-	if (isdigit(option[0]))
+	
+	if (iswdigit(option[0]))
 		return option[0] - '0';
 	else
 		return HELP;

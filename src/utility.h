@@ -45,6 +45,8 @@ Rectangle* loadRectangle(std::ifstream&);
 Line* loadLine(std::ifstream&);
 Triangle* loadTriangle(std::ifstream&);
 
+bool checkIsDigit(const std::string&);
+bool checkInput(const std::string&);
 void printStatus(const std::string&);
 void printStatus(const std::string&, int, int);
 int getOption();

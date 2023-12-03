@@ -32,6 +32,6 @@ public:
 	void deleteSpecificShape(const std::string&);
 	void deleteNthShape(int);
 	void increaseCapacity();
-	bool action(int);
+	bool action(int, const std::string&, Shape*);
 
 };

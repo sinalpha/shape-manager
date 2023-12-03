@@ -8,7 +8,6 @@
 #include "shape.h"
 
 
-//도형 생성 관련 유틸
 Shape* selShape(int shape, int way) {
 
 	switch (shape) {
@@ -30,9 +29,9 @@ Triangle* newTriangle(int way) {
 
 	Point points[3];
 	switch (way) {
-	case 1:
+	case DEFAULT:
 		return new Triangle;
-	case 2:
+	case INPUT:
 		//점 3개 얻기
 		for (int i = 0; i < 3; ++i) {
 			std::cout << "입력 x" << i + 1 << ", y" << i + 1 << '\n';
@@ -51,9 +50,9 @@ Circle* newCircle(int way) {
 		Point point;
 		double r;
 		switch (way) {
-		case 1:
+		case DEFAULT:
 			return new Circle;
-		case 2:
+		case INPUT:
 			std::cout << "입력 x, y, r" << '\n';
 			std::cin >> point.x >> point.y >> r;
 			return new Circle(point, r);
@@ -69,9 +68,9 @@ Rectangle* newRectangle(int way){
 	while (true) {
 		Point points[2];
 		switch (way) {
-		case 1:
+		case DEFAULT:
 			return new Rectangle;
-		case 2:
+		case INPUT:
 			for (int i = 0; i < 2; ++i) {
 				std::cout << "입력 x" << i + 1 << ", y" << i + 1 << '\n';
 				std::cin >> points[i].x >> points[i].y;
@@ -88,9 +87,9 @@ Line* newLine(int way){
 	while (true) {
 		Point points[2];
 		switch (way) {
-		case 1:
+		case DEFAULT:
 			return new Line;
-		case 2:
+		case INPUT:
 			for (int i = 0; i < 2; ++i) {
 				std::cout << "입력 x" << i + 1 << ", y" << i + 1 << '\n';
 				std::cin >> points[i].x >> points[i].y;
@@ -138,7 +137,6 @@ Triangle* loadTriangle(std::ifstream& in) {
 	return new Triangle(p[0], p[1], p[2]);
 }
 
-//
 void printStatus(const std::string& status) {
 	std::cout << "--------------------------------------" << '\n';
 	std::cout << status << '\n';
@@ -161,7 +159,7 @@ int getOption() {
 	if (isdigit(option[0]))
 		return option[0] - '0';
 	else
-		return 9;
+		return HELP;
 }
 
 int stringToInt(const std::string& str) {

@@ -43,7 +43,6 @@ void Circle::draw() const
 }
 
 void Circle::load(std::ifstream& in) {
-	std::cout << "¿ø";
 	in >> center.x >> center.y >> rad;
 
 }

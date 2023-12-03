@@ -7,6 +7,8 @@
 // 2023. 11. 19		by Wulong
 // --------------------------
 #pragma once
+#include <string.h>
+
 #include "shape.h"
 #include "point.h"
 #include "triangle.h"
@@ -38,8 +40,9 @@ class ShapeManager {
 	Shape** shapes;
 
 	std::string getShapeType(Shape*) const;
-	void printStatus(const std::string& status) const;
-	void printStatus(const std::string& status, int capacity, int nShape) const;
+	int ConvertShapeTypeToInt(const std::string&) const;
+	void printStatus(const std::string&) const;
+	void printStatus(const std::string&, int, int) const;
 
 public:
 	explicit ShapeManager(int);		

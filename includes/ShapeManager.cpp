@@ -158,7 +158,7 @@ void ShapeManager::save(const string& fileName) const {
 
 	ofstream out{ fileName };
 	for (int i = 0; i < nShape; ++i)
-		out << getShapeType(shapes[i]) + " " + shapes[i]->save() + " ";
+		out << to_string(ConvertShapeTypeToInt(getShapeType(shapes[i]))) + " " + shapes[i]->save() + " ";
 
 	printStatus("모든 도형을 "s + fileName + "에 저장을 하였습니다"s);
 
@@ -211,17 +211,33 @@ void ShapeManager::load(const string& fileName) {
 
 string ShapeManager::getShapeType(Shape* shape) const {
 	if (dynamic_cast<Line*>(shape))
-		return std::to_string(LINE);
+		return "선";
 
 	if (dynamic_cast<Circle*>(shape))
-		return std::to_string(CIRCLE);
+		return "원";
 
 	if (dynamic_cast<Rectangle*>(shape))
-		return std::to_string(RECTANGLE);
+		return "사각형";
 
 	if (dynamic_cast<Triangle*>(shape))
-		return std::to_string(TRIANGLE);
+		return "삼각형";
+
+	return "None";
 }
+
+int ShapeManager::ConvertShapeTypeToInt(const string& str) const {
+	if ("삼각형" == str)
+		return TRIANGLE;
+	if ("사각형" == str)
+		return RECTANGLE;
+	if ("원" == str)
+		return CIRCLE;
+	if ("선" == str)
+		return LINE;
+
+	return -1;
+}
+
 
 void ShapeManager::printStatus(const std::string& status) const {
 	std::cout << "--------------------------------------" << '\n';

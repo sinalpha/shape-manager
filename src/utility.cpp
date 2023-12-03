@@ -152,22 +152,14 @@ void deleteSpecificShape(std::string shapesType, ShapeManager& sm) {
 
 	Shape* shape;
 	for (int i = 1; nullptr != (shape = sm.returnNthShape(i)); ++i) {
-		if (("선" == shapesType) and dynamic_cast<Line*>(shape)) {
-			sm.deleteNthShape(i);
-			i = 0;
-		}	
-		if (("삼각형" == shapesType) and dynamic_cast<Triangle*>(shape)) {
-			sm.deleteNthShape(i);
-			i = 0;
-		}
-		if (("사각형" == shapesType) and dynamic_cast<Rectangle*>(shape)){
-			sm.deleteNthShape(i);
-			i = 0;
-		}
-		if (("원" == shapesType) and dynamic_cast<Circle*>(shape)){
-			sm.deleteNthShape(i);
-			i = 0;
-		}
+		if (("선" == shapesType) and dynamic_cast<Line*>(shape))
+			sm.deleteNthShape(i--);	
+		if (("삼각형" == shapesType) and dynamic_cast<Triangle*>(shape))
+			sm.deleteNthShape(i--);
+		if (("사각형" == shapesType) and dynamic_cast<Rectangle*>(shape))
+			sm.deleteNthShape(i--);
+		if (("원" == shapesType) and dynamic_cast<Circle*>(shape))
+			sm.deleteNthShape(i--);
 	}
 
 }

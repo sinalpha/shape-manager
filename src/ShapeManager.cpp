@@ -74,13 +74,12 @@ bool ShapeManager::action(int option) {
 void ShapeManager::insert(Shape* a)
 {
 
-	printStatus(a->shapeType + " 도형을 만듭니다");
-
-
 	if (nullptr == a) {
 		printStatus(insertHelp);
 		return;
 	}
+
+	printStatus(a->shapeType + " 도형을 만듭니다");
 
 	if (nShape == capacity)
 		increaseCapacity();

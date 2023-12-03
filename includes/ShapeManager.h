@@ -27,7 +27,7 @@ public:
 	void draw() const;
 	void save(const std::string&) const;
 	void load(std::ifstream&, Shape*);
-	Shape* returnNthShape(int);
+	Shape* returnNthShape(int) const;
 	void deleteNthShape(int);
 	void increaseCapacity();
 

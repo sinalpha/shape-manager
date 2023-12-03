@@ -65,7 +65,7 @@ void ShapeManager::draw() const
 	std::cout << "---------------------------------------" << '\n';
 
 }
-Shape* ShapeManager::returnNthShape(int i) {
+Shape* ShapeManager::returnNthShape(int i) const {
 
 	if (0 >= i or i > nShape)
 		return nullptr;

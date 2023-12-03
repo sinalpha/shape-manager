@@ -151,6 +151,7 @@ void deleteSpecificShape(std::string shapesType, ShapeManager& sm) {
 	std::cout << shapesType;
 
 	Shape* shape;
+	// 비효율적이지만 그냥 이렇게 합시다
 	for (int i = 1; nullptr != (shape = sm.returnNthShape(i)); ++i) {
 		if (("선" == shapesType) and dynamic_cast<Line*>(shape))
 			sm.deleteNthShape(i--);	

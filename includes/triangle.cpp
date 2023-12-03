@@ -29,12 +29,13 @@ Triangle::~Triangle()
 }
 
 std::string Triangle::save() const {
-	return std::to_string(p1.x) +
-		" " + std::to_string(p1.y) +
-		" " + std::to_string(p2.x) +
-		" " + std::to_string(p2.y) +
-		" " + std::to_string(p3.x) +
-		" " + std::to_string(p3.y);
+	return   "3 " +
+		std::to_string(p1.x) + " " + 
+		std::to_string(p1.y) + " " + 
+		std::to_string(p2.x) + " " +
+		std::to_string(p2.y) + " " + 
+		std::to_string(p3.x) + " " +
+		std::to_string(p3.y);
 }
 
 void Triangle::draw() const

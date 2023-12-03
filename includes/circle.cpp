@@ -31,9 +31,10 @@ Circle::~Circle()
 
 std::string Circle::save() const
 {
-	return std::to_string(center.x) +
-		" " + std::to_string(center.y) +
-		" " + std::to_string(rad);
+	return "1 " +
+		std::to_string(center.x) + " " +
+		std::to_string(center.y) + " " +
+		std::to_string(rad);
 }
 
 void Circle::draw() const

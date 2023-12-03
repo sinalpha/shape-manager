@@ -13,11 +13,11 @@ using namespace std;
 
 ShapeManager::ShapeManager(int n)
 {
-	printStatus("관리를 시작합니다"s);
 
 	nShape = 0;			
 	capacity = n;
 	shapes = new Shape*[capacity];
+
 }
 ShapeManager::~ShapeManager()
 {
@@ -26,110 +26,57 @@ ShapeManager::~ShapeManager()
 
 	delete[] shapes;
 
-	printStatus("관리를 종료합니다"s);
-}
-bool ShapeManager::action(int option, const string& input1, Shape* shape) {
-
-	switch (option) {
-	case CREATE_SHAPE:
-		insert(shape);
-		return true;
-	case DRAW_SHAPE:
-		draw();
-		return true;
-	case DELETE_SPEC_SHPAE:
-		deleteSpecificShape(input1);
-		return true;
-	case DELETE_NTH_SHAPE:
-		deleteNthShape(stoi(input1));
-		return true;
-	case SAVE_SHAPE:
-		save(input1);
-		return true;
-	case LOAD_SHAPE:
-		load(input1);
-		return true;
-	default:
-		return false;
-	}
-
 }
 
-void ShapeManager::insert(Shape* a)
+bool ShapeManager::insert(Shape* a)
 {
-
-	printStatus("도형을 만듭니다");
-
-	if (nullptr == a) {
-		printStatus("도형을 만드는데 실패하였습니다");
-		return;
-	}
-
+	
+	if (nullptr == a)
+		return false;
+	
 	if (nShape == capacity)
 		increaseCapacity();
 	
 	shapes[nShape] = a;
 	++nShape;
-	printStatus("생성 후 결과", capacity, nShape);
 
-	printStatus("도형을 만드는데 성공하였습니다"s);
+	return true;
 
 }
 void ShapeManager::draw() const
 {
 
-	printStatus("관리하는 모든 도형을 그립니다"s, capacity, nShape);
-
 	if (nShape <= 0)
-		printStatus("그릴 도형이 없습니다"s);
+		return;
+
+	std::cout << "---------------------------------------" << '\n';
+	std::cout << "모든 도형을 그립니다" << '\n';
+	std::cout << "최대 " << capacity << "개의 도형을 담을 수 있습니다" << '\n';
+	std::cout << "모두 " << nShape << "개의 도형이 있습니다" << '\n';
+	std::cout << "---------------------------------------" << '\n';
 
 	for (int i = 0; i < nShape; ++i) {
 		cout << "[" << i << "]  ";
 		shapes[i]->draw();
 	}
 
-	printStatus("그리기를 마칩니다"s);
+	std::cout << "---------------------------------------" << '\n';
+	std::cout << "그리기를 마칩니다" << '\n';
+	std::cout << "---------------------------------------" << '\n';
 
 }
-void ShapeManager::deleteSpecificShape(const string& type) {
+Shape* ShapeManager::returnNthShape(int i) {
 
-	printStatus(type + "을 모두 지웁니다");
+	if (0 >= i or i > nShape)
+		return nullptr;
 
-	// To Do O(n)으로 지우기
-	for (int i = 0; i < nShape; ++i) {
-		if (type == "삼각형")
-			if (dynamic_cast<Triangle*>(shapes[i])) {
-				deleteNthShape(i + 1);
-				i = -1;
-			}
-		if (type == "원")
-			if (dynamic_cast<Circle*>(shapes[i])) {
-				deleteNthShape(i + 1);
-				i = -1;
-			}
-		if (type == "사각형")
-			if (dynamic_cast<Rectangle*>(shapes[i])) {
-				deleteNthShape(i + 1);
-				i = -1;
-			}
-		if (type == "선")
-			if (dynamic_cast<Line*>(shapes[i])) {
-				deleteNthShape(i + 1);
-				i = -1;
-			}
-	}
-
-	printStatus(type + "을 모두 지웠습니다");
+	return shapes[i - 1];
 
 }
 void ShapeManager::deleteNthShape(int n) {
 
-	printStatus(to_string(n) + "번째 도형을 지웁니다"s);
-
-	if (0 >= n or nShape < n) {
-		printStatus("잘못된 숫자를 입력하였습니다", capacity, nShape);
+	if (0 >= n or nShape < n) 
 		return;
-	}
 
 	int idx = n - 1;
 	delete shapes[idx];
@@ -138,12 +85,8 @@ void ShapeManager::deleteNthShape(int n) {
 		shapes[i] = shapes[i + 1];
 	--nShape;
 
-	printStatus(to_string(n) + "번째 도형을 지웠습니다"s);
-
 }
 void ShapeManager::increaseCapacity() {
-
-	printStatus("수용 용량을 늘립니다.");
 
 	Shape** temp = shapes;
 	capacity = capacity * 2;
@@ -154,101 +97,14 @@ void ShapeManager::increaseCapacity() {
 }
 void ShapeManager::save(const string& fileName) const {
 
-	printStatus("모든 도형을 "s + fileName + "에 저장합니다"s);
-
 	ofstream out{ fileName };
 	for (int i = 0; i < nShape; ++i)
-		out << to_string(ConvertShapeTypeToInt(getShapeType(shapes[i]))) + " " + shapes[i]->save() + " ";
-
-	printStatus("모든 도형을 "s + fileName + "에 저장을 하였습니다"s);
+		out << shapes[i]->save() + " ";
 
 }
-void ShapeManager::load(const string& fileName) {
+void ShapeManager::load(ifstream& in, Shape* loadedShape) {
 
-	printStatus(fileName + "에서 읽기를 시작합니다"s);
+	in >> *loadedShape;
+	insert(loadedShape);
 
-	ifstream in{ fileName };
-	if (not in) {
-		printStatus(fileName + "가 존재하지 않습니다"s);
-		return;
-	}
-
-	int shape_type;
-	Shape* newShape;
-	while (in >> shape_type) {
-		switch (shape_type) {
-		case TRIANGLE:
-			newShape = new Triangle;
-			in >> *newShape;
-			insert(newShape);
-			continue;
-		case CIRCLE:
-			newShape = new Circle;
-			in >> *newShape;
-			insert(newShape);
-			continue;
-		case LINE:
-			newShape = new Line;
-			in >> *newShape;
-			insert(newShape);
-			continue;
-		case RECTANGLE:
-			newShape = new Rectangle;
-			in >> *newShape;
-			insert(newShape);
-			continue;
-		default:
-			printStatus("읽기를 실패하였습니다");
-			return;
-		}
-	}
-
-	printStatus("읽기를 성공적으로 마쳤습니다");
-
-}
-
-
-
-string ShapeManager::getShapeType(Shape* shape) const {
-	if (dynamic_cast<Line*>(shape))
-		return "선";
-
-	if (dynamic_cast<Circle*>(shape))
-		return "원";
-
-	if (dynamic_cast<Rectangle*>(shape))
-		return "사각형";
-
-	if (dynamic_cast<Triangle*>(shape))
-		return "삼각형";
-
-	return "None";
-}
-
-int ShapeManager::ConvertShapeTypeToInt(const string& str) const {
-	if ("삼각형" == str)
-		return TRIANGLE;
-	if ("사각형" == str)
-		return RECTANGLE;
-	if ("원" == str)
-		return CIRCLE;
-	if ("선" == str)
-		return LINE;
-
-	return -1;
-}
-
-
-void ShapeManager::printStatus(const std::string& status) const {
-	std::cout << "--------------------------------------" << '\n';
-	std::cout << status << '\n';
-	std::cout << "--------------------------------------" << '\n';
-}
-
-void ShapeManager::printStatus(const std::string& status, int capacity, int nShape) const {
-	std::cout << "---------------------------------------" << '\n';
-	std::cout << status << '\n';
-	std::cout << "최대 " << capacity << "개의 도형을 담을 수 있습니다" << '\n';
-	std::cout << "모두 " << nShape << "개의 도형이 있습니다" << '\n';
-	std::cout << "---------------------------------------" << '\n';
 }

@@ -18,10 +18,11 @@ Line::~Line() {
 }
 
 std::string Line::save() const {
-	return std::to_string(st.x) +
-		" " + std::to_string(st.y) +
-		" " + std::to_string(ed.x) +
-		" " + std::to_string(ed.y);
+	return "4 " + 
+		std::to_string(st.x) + " " +
+		std::to_string(st.y) + " " +
+		std::to_string(ed.x) + " " +
+		std::to_string(ed.y);
 }
 
 void Line::draw() const {

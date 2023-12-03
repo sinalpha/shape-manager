@@ -2,12 +2,32 @@
 #include <string.h>
 #include <fstream>
 
-#include "../includes/ShapeManager.h"
-
+#include "../includes/shapeManager.h"
+#include "../includes/line.h"
+#include "../includes/circle.h"
+#include "../includes/triangle.h"
+#include "../includes/rectangle.h"
 
 enum WAY_TYPE {
 	DEFAULT = 1,
 	INPUT
+};
+
+enum ACTION_TYPE {
+	CREATE_SHAPE = 1,
+	DRAW_SHAPE,
+	DELETE_SPEC_SHPAE,
+	DELETE_NTH_SHAPE,
+	SAVE_SHAPE,
+	LOAD_SHAPE,
+};
+
+enum SHAPE_TYPE {
+	NONE = 0,
+	CIRCLE,
+	RECTANGLE,
+	TRIANGLE,
+	LINE
 };
 
 const std::string help = "\n0: 프로그램 종료하기\n1 (도형) (생성 방법) : 원하는 도형 추가\n2 : 전체 도형을 그리기\n3 : n번째 도형을 제거\n4 : 원하는 도형을 모두 제거\n5: 저장하기\n6: 불러오기\n";
@@ -23,3 +43,5 @@ bool checkIsDigit(const std::string&);
 bool checkInput(const std::string&);
 int getOption();
 int stringToInt(const std::string&);
+void deleteSpecificShape(std::string, ShapeManager&);
+void loadShapes(std::string, ShapeManager&);

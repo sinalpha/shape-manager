@@ -27,10 +27,11 @@ Rectangle::~Rectangle()
 }
 
 std::string Rectangle::save() const {
-	return std::to_string(p1.x) +
-		" " + std::to_string(p1.y) +
-		" " + std::to_string(p2.x) +
-		" " + std::to_string(p2.y);
+	return "2 " +
+		std::to_string(p1.x) + " " +
+		std::to_string(p1.y) + " " +
+		std::to_string(p2.x) + " " +
+		std::to_string(p2.y);
 }
 
 

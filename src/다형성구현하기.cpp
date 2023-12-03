@@ -11,7 +11,6 @@
 #include "../includes/ShapeManager.h"
 #include "utility.h"
 
-// To Do ShapeManger에서는 오직 shape만 include하게 함.
 int main()
 {
 
@@ -26,37 +25,50 @@ int main()
 		case CREATE_SHAPE:
 			std::cout << "(도형) (생성 방법): ";
 			std::cin >> input1 >> input2;
-			if (!checkIsDigit(input1 + input2)) {
+			if (not checkIsDigit(input1 + input2)) {
 				std::cout << insertHelp;
 				continue;
 			}
-			sm.action(CREATE_SHAPE, input1, selShape(input1[0] - '0', input2[0] - '0'));
+			if (not sm.insert(selShape(input1[0] - '0', input2[0] - '0')))
+				std::cout << insertHelp;
 			break;
+
+
 		case DRAW_SHAPE:
-			sm.action(DRAW_SHAPE, input1, nullptr);
+			sm.draw();
 			break;
+
+
 		case DELETE_SPEC_SHPAE:
 			std::cout << "어떤 도형을 지우겠습니까?: ";
 			std::cin >> input1;
-			sm.action(DELETE_SPEC_SHPAE, input1, nullptr);
+			deleteSpecificShape(input1, sm);
 			break;
+		
+		
 		case DELETE_NTH_SHAPE:
 			std::cout << "지울 도형의 위치 : ";
 			std::cin >> input1;
 			if (!checkIsDigit(input1))
 				continue;
-			sm.action(DELETE_NTH_SHAPE, input1, nullptr);
+			sm.deleteNthShape(std::stoi(input1));
 			break;
+
+
 		case SAVE_SHAPE:
 			std::cout << "저장할 파일의 위치를 입력하시오: ";
 			std::cin >> input1;
-			sm.action(SAVE_SHAPE, input1, nullptr);
+			sm.save(input1);
 			break;
+		
+
 		case LOAD_SHAPE:
 			std::cout << "로드할 파일을 입력하시오: ";
 			std::cin >> input1;
-			sm.action(LOAD_SHAPE, input1, nullptr);
+			loadShapes(input1, sm);
 			break;
+
+
 		default:
 			std::cout << help;
 		}
@@ -66,5 +78,6 @@ int main()
 
 		
 }
+
 
 

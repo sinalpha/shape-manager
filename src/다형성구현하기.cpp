@@ -8,6 +8,8 @@
 #include "ShapeManager.h"
 #include "utility.h"
 
+
+// To Do 입력받은 값을 모두 검사하는 함수 만들기
 int main()
 {
 

@@ -11,8 +11,7 @@
 #include "../includes/ShapeManager.h"
 #include "utility.h"
 
-// To Do 사람이 쓰는 프로그램이 아닌 프레임워크처럼 만들기
-// To Do 입력받은 값을 모두 검사하는 함수 만들기
+// To Do ShapeManger에서는 오직 shape만 include하게 함.
 int main()
 {
 

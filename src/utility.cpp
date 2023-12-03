@@ -2,11 +2,8 @@
 #include <string>
 
 #include "utility.h"
-#include "circle.h"
-#include "rectangle.h"
-#include "triangle.h"
-#include "line.h"
-#include "shape.h"
+#include "../includes/ShapeManager.h"
+
 
 
 Shape* selShape(int shape, int way) {
@@ -102,42 +99,6 @@ Line* newLine(int way){
 	}
 }
 
-Circle* loadCircle(std::ifstream& in) {
-	
-	Point p;
-	double r;
-	in >> p.x >> p.y >> r;
-
-	return new Circle(p, r);
-}
-
-Rectangle* loadRectangle(std::ifstream& in) {
-	
-	Point p[2];
-	for (int i = 0; i < 2; ++i)
-		in >> p[i].x >> p[i].y;
-
-	return new Rectangle(p[0], p[1]);
-}
-
-Line* loadLine(std::ifstream& in) {
-
-	Point p[2];
-	for (int i = 0; i < 2; ++i)
-		in >> p[i].x >> p[i].y;
-
-	return new Line(p[0], p[1]);
-}
-
-Triangle* loadTriangle(std::ifstream& in) {
-
-	Point p[3];
-	for (int i = 0; i < 3; ++i)
-		in >> p[i].x >> p[i].y;
-
-	return new Triangle(p[0], p[1], p[2]);
-}
-
 bool checkIsDigit(const std::string& str) {
 
 	for (int i = 0; i < str.size(); ++i)
@@ -163,20 +124,6 @@ bool checkInput(const std::string& str) {
 	return true;
 }
 
-void printStatus(const std::string& status) {
-	std::cout << "--------------------------------------" << '\n';
-	std::cout << status << '\n';
-	std::cout << "--------------------------------------" << '\n';
-}
-
-void printStatus(const std::string& status, int capacity, int nShape) {
-	std::cout << "---------------------------------------" << '\n';
-	std::cout << status << '\n';
-	std::cout << "최대 " << capacity << "개의 도형을 담을 수 있습니다" << '\n';
-	std::cout << "모두 " << nShape << "개의 도형이 있습니다" << '\n';
-	std::cout << "---------------------------------------" << '\n';
-}
-
 int getOption() {
 	std::cout << "할 행동을 선택하시오 Help - 9: ";
 	std::string option{};
@@ -185,7 +132,7 @@ int getOption() {
 	if (iswdigit(option[0]))
 		return option[0] - '0';
 	else
-		return HELP;
+		return 9;
 }
 
 int stringToInt(const std::string& str) {

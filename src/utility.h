@@ -2,30 +2,8 @@
 #include <string.h>
 #include <fstream>
 
-#include "circle.h"
-#include "rectangle.h"
-#include "triangle.h"
-#include "line.h"
-#include "shape.h"
+#include "../includes/ShapeManager.h"
 
-enum SHAPE_TYPE {
-	NONE = 0,
-	CIRCLE,
-	RECTANGLE,
-	TRIANGLE,
-	LINE
-};
-
-enum ACTION_TYPE {
-	END = 0,
-	CREATE_SHAPE,
-	DRAW_SHAPE,
-	DELETE_SPEC_SHPAE,
-	DELETE_NTH_SHAPE,
-	SAVE_SHAPE,
-	LOAD_SHAPE,
-	HELP = 9
-};
 
 enum WAY_TYPE {
 	DEFAULT = 1,
@@ -40,14 +18,8 @@ Triangle* newTriangle(int);
 Circle* newCircle(int);
 Rectangle* newRectangle(int);
 Line* newLine(int);
-Circle* loadCircle(std::ifstream&);
-Rectangle* loadRectangle(std::ifstream&);
-Line* loadLine(std::ifstream&);
-Triangle* loadTriangle(std::ifstream&);
 
 bool checkIsDigit(const std::string&);
 bool checkInput(const std::string&);
-void printStatus(const std::string&);
-void printStatus(const std::string&, int, int);
 int getOption();
 int stringToInt(const std::string&);

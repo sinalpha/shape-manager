@@ -8,16 +8,12 @@
 #include <string>
 
 #include "shapeManager.h"
-#include "utility.h"
 
 using namespace std;
 
 ShapeManager::ShapeManager(int n)
 {
-	for (int i = 0; i < 10; ++i)
-		cout << "무작위로 입력하지 마세요 ㅡㅡ;(필수 기능만 구현함)\n";
-
-	printStatus("관리를 시작합니다");
+	printStatus("관리를 시작합니다"s);
 
 	nShape = 0;			
 	capacity = n;
@@ -30,7 +26,7 @@ ShapeManager::~ShapeManager()
 
 	delete[] shapes;
 
-	printStatus("관리를 종료합니다");
+	printStatus("관리를 종료합니다"s);
 }
 bool ShapeManager::action(int option, const string& input1, Shape* shape) {
 
@@ -62,12 +58,12 @@ bool ShapeManager::action(int option, const string& input1, Shape* shape) {
 void ShapeManager::insert(Shape* a)
 {
 
+	printStatus("도형을 만듭니다");
+
 	if (nullptr == a) {
 		printStatus("도형을 만드는데 실패하였습니다");
 		return;
 	}
-
-	printStatus(a->shapeType + " 도형을 만듭니다");
 
 	if (nShape == capacity)
 		increaseCapacity();
@@ -76,23 +72,23 @@ void ShapeManager::insert(Shape* a)
 	++nShape;
 	printStatus("생성 후 결과", capacity, nShape);
 
-	printStatus(a->shapeType + " 도형을 만드는데 성공하였습니다"s);
+	printStatus("도형을 만드는데 성공하였습니다"s);
 
 }
 void ShapeManager::draw() const
 {
 
-	printStatus("관리하는 모든 도형을 그립니다", capacity, nShape);
+	printStatus("관리하는 모든 도형을 그립니다"s, capacity, nShape);
 
 	if (nShape <= 0)
-		printStatus("그릴 도형이 없습니다");
+		printStatus("그릴 도형이 없습니다"s);
 
 	for (int i = 0; i < nShape; ++i) {
 		cout << "[" << i << "]  ";
 		shapes[i]->draw();
 	}
 
-	printStatus("그리기를 마칩니다");
+	printStatus("그리기를 마칩니다"s);
 
 }
 void ShapeManager::deleteSpecificShape(const string& type) {
@@ -158,40 +154,48 @@ void ShapeManager::increaseCapacity() {
 }
 void ShapeManager::save(const string& fileName) const {
 
-	printStatus("모든 도형을 " + fileName + "에 저장합니다");
+	printStatus("모든 도형을 "s + fileName + "에 저장합니다"s);
 
 	ofstream out{ fileName };
 	for (int i = 0; i < nShape; ++i)
-		out << shapes[i]->save() + " ";
+		out << getShapeType(shapes[i]) + " " + shapes[i]->save() + " ";
 
-	printStatus("모든 도형을 " + fileName + "에 저장을 하였습니다");
+	printStatus("모든 도형을 "s + fileName + "에 저장을 하였습니다"s);
 
 }
 void ShapeManager::load(const string& fileName) {
 
-	printStatus(fileName + "에서 읽기를 시작합니다");
+	printStatus(fileName + "에서 읽기를 시작합니다"s);
 
 	ifstream in{ fileName };
 	if (not in) {
-		printStatus(fileName + "가 존재하지 않습니다");
+		printStatus(fileName + "가 존재하지 않습니다"s);
 		return;
 	}
 
 	int shape_type;
-
+	Shape* newShape;
 	while (in >> shape_type) {
 		switch (shape_type) {
 		case TRIANGLE:
-			insert(loadCircle(in));
+			newShape = new Triangle;
+			in >> *newShape;
+			insert(newShape);
 			continue;
 		case CIRCLE:
-			insert(loadCircle(in));
+			newShape = new Circle;
+			in >> *newShape;
+			insert(newShape);
 			continue;
 		case LINE:
-			insert(loadLine(in));
+			newShape = new Line;
+			in >> *newShape;
+			insert(newShape);
 			continue;
 		case RECTANGLE:
-			insert(loadRectangle(in));
+			newShape = new Rectangle;
+			in >> *newShape;
+			insert(newShape);
 			continue;
 		default:
 			printStatus("읽기를 실패하였습니다");
@@ -205,3 +209,30 @@ void ShapeManager::load(const string& fileName) {
 
 
 
+string ShapeManager::getShapeType(Shape* shape) const {
+	if (dynamic_cast<Line*>(shape))
+		return std::to_string(LINE);
+
+	if (dynamic_cast<Circle*>(shape))
+		return std::to_string(CIRCLE);
+
+	if (dynamic_cast<Rectangle*>(shape))
+		return std::to_string(RECTANGLE);
+
+	if (dynamic_cast<Triangle*>(shape))
+		return std::to_string(TRIANGLE);
+}
+
+void ShapeManager::printStatus(const std::string& status) const {
+	std::cout << "--------------------------------------" << '\n';
+	std::cout << status << '\n';
+	std::cout << "--------------------------------------" << '\n';
+}
+
+void ShapeManager::printStatus(const std::string& status, int capacity, int nShape) const {
+	std::cout << "---------------------------------------" << '\n';
+	std::cout << status << '\n';
+	std::cout << "최대 " << capacity << "개의 도형을 담을 수 있습니다" << '\n';
+	std::cout << "모두 " << nShape << "개의 도형이 있습니다" << '\n';
+	std::cout << "---------------------------------------" << '\n';
+}

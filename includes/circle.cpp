@@ -5,17 +5,18 @@
 // --------------------------
 
 #include <iostream>
+#include <fstream>
 #include <string>
+
 #include "circle.h"
-#include "utility.h"
 
 Circle::Circle()
-	: center{}, rad{0.0}, Shape{"원"}
+	: center{}, rad{0.0}
 {
 }
 
 Circle::Circle(const Point& c, double r)
-	: center{ c }, rad{ r }, Shape{ "원" }
+	: center{ c }, rad{ r }
 {
 }
 
@@ -30,8 +31,7 @@ Circle::~Circle()
 
 std::string Circle::save() const
 {
-	return std::to_string(CIRCLE) +
-		" " + std::to_string(center.x) +
+	return std::to_string(center.x) +
 		" " + std::to_string(center.y) +
 		" " + std::to_string(rad);
 }
@@ -42,3 +42,8 @@ void Circle::draw() const
 		<< ") 반지름 " << rad << '\n';
 }
 
+void Circle::load(std::ifstream& in) {
+
+	in >> center.x >> center.y;
+
+}

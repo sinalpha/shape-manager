@@ -5,7 +5,7 @@
 // --------------------------
 #pragma once
 #include <string>
-
+#include <fstream>
 #include "point.h"						
 #include "shape.h"						
 
@@ -22,5 +22,8 @@ public:
 
 	std::string save() const override;
 	virtual void draw() const override;	
+	void load(std::ifstream& in) override;
+
+
 };
 

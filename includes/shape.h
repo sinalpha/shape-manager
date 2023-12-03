@@ -12,13 +12,19 @@
 class Shape
 {
 public:
-	std::string shapeType{ "None" };
 	
 	Shape() { };
-	Shape(std::string shapeType) : shapeType{ shapeType } { };
 	virtual ~Shape() { };
 
 	virtual std::string save() const = 0;
 	virtual void draw() const = 0;	
+	virtual void load(std::ifstream&) = 0;
+
+	friend Shape& operator>>(std::ifstream& in, Shape& shape) {
+		
+		shape.load(in);
+
+		return shape;
+	}
 
 };

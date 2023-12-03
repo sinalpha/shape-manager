@@ -8,7 +8,7 @@
 #include <iostream>
 #include <string.h>
 
-#include "ShapeManager.h"
+#include "../includes/ShapeManager.h"
 #include "utility.h"
 
 // To Do 사람이 쓰는 프로그램이 아닌 프레임워크처럼 만들기
@@ -19,7 +19,7 @@ int main()
 	ShapeManager sm(100);
 
 	int option;
-	while (END != (option = getOption())) {
+	while (0 != (option = getOption())) {
 		
 		std::string input1, input2{};
 		
@@ -28,7 +28,7 @@ int main()
 			std::cout << "(도형) (생성 방법): ";
 			std::cin >> input1 >> input2;
 			if (!checkIsDigit(input1 + input2)) {
-				printStatus(insertHelp);
+				std::cout << insertHelp;
 				continue;
 			}
 			sm.action(CREATE_SHAPE, input1, selShape(input1[0] - '0', input2[0] - '0'));
@@ -59,7 +59,7 @@ int main()
 			sm.action(LOAD_SHAPE, input1, nullptr);
 			break;
 		default:
-			printStatus(help);
+			std::cout << help;
 		}
 			
 	}

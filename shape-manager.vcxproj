@@ -19,22 +19,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="includes\circle.h" />
-    <ClInclude Include="includes\line.h" />
     <ClInclude Include="includes\point.h" />
-    <ClInclude Include="includes\rectangle.h" />
     <ClInclude Include="includes\shape.h" />
     <ClInclude Include="includes\ShapeManager.h" />
-    <ClInclude Include="includes\triangle.h" />
+    <ClInclude Include="src\circle.h" />
+    <ClInclude Include="src\line.h" />
+    <ClInclude Include="src\rectangle.h" />
+    <ClInclude Include="src\triangle.h" />
     <ClInclude Include="src\utility.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="includes\circle.cpp" />
-    <ClCompile Include="includes\line.cpp" />
     <ClCompile Include="includes\point.cpp" />
-    <ClCompile Include="includes\rectangle.cpp" />
     <ClCompile Include="includes\ShapeManager.cpp" />
-    <ClCompile Include="includes\triangle.cpp" />
+    <ClCompile Include="src\circle.cpp" />
+    <ClCompile Include="src\line.cpp" />
+    <ClCompile Include="src\rectangle.cpp" />
+    <ClCompile Include="src\triangle.cpp" />
     <ClCompile Include="src\utility.cpp" />
     <ClCompile Include="src\다형성구현하기.cpp" />
   </ItemGroup>

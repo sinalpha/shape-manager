@@ -5,27 +5,18 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{0159ddbb-20c5-4d60-9f07-a44b5d1fc69b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ShapeManager">
       <UniqueIdentifier>{8e31e621-f68a-4e78-822e-2e26bf62c006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0159ddbb-20c5-4d60-9f07-a44b5d1fc69b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="includes\circle.h">
-      <Filter>ShapeManager</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\line.h">
-      <Filter>ShapeManager</Filter>
-    </ClInclude>
     <ClInclude Include="includes\point.h">
-      <Filter>ShapeManager</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\rectangle.h">
       <Filter>ShapeManager</Filter>
     </ClInclude>
     <ClInclude Include="includes\shape.h">
@@ -34,8 +25,17 @@
     <ClInclude Include="includes\ShapeManager.h">
       <Filter>ShapeManager</Filter>
     </ClInclude>
-    <ClInclude Include="includes\triangle.h">
-      <Filter>ShapeManager</Filter>
+    <ClInclude Include="src\circle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\line.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\triangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rectangle.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -45,23 +45,23 @@
     <ClCompile Include="src\utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="includes\circle.cpp">
-      <Filter>ShapeManager</Filter>
-    </ClCompile>
-    <ClCompile Include="includes\line.cpp">
-      <Filter>ShapeManager</Filter>
-    </ClCompile>
     <ClCompile Include="includes\point.cpp">
-      <Filter>ShapeManager</Filter>
-    </ClCompile>
-    <ClCompile Include="includes\rectangle.cpp">
       <Filter>ShapeManager</Filter>
     </ClCompile>
     <ClCompile Include="includes\ShapeManager.cpp">
       <Filter>ShapeManager</Filter>
     </ClCompile>
-    <ClCompile Include="includes\triangle.cpp">
-      <Filter>ShapeManager</Filter>
+    <ClCompile Include="src\circle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\line.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rectangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\triangle.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

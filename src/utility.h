@@ -3,10 +3,10 @@
 #include <fstream>
 
 #include "../includes/shapeManager.h"
-#include "../includes/line.h"
-#include "../includes/circle.h"
-#include "../includes/triangle.h"
-#include "../includes/rectangle.h"
+#include "line.h"
+#include "circle.h"
+#include "triangle.h"
+#include "rectangle.h"
 
 enum WAY_TYPE {
 	DEFAULT = 1,

@@ -1,7 +1,7 @@
 #include <string>
 #include <fstream>
-#include "shape.h"
-#include "point.h"
+#include "../includes/point.h"						
+#include "../includes/shape.h"		
 
 
 class Line : public Shape

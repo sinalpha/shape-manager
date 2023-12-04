@@ -7,8 +7,8 @@
 #include <string>
 #include <fstream>
 
-#include "point.h"
-#include "shape.h"
+#include "../includes/point.h"						
+#include "../includes/shape.h"		
 
 class Circle : public Shape
 {

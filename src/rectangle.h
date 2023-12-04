@@ -5,7 +5,7 @@
 // --------------------------
 #include <string>
 #include <fstream>
-#include "../includes/point.h"						
+#include "point.h"						
 #include "../includes/shape.h"		
 
 class Rectangle : public Shape

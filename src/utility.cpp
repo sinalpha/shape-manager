@@ -3,6 +3,7 @@
 
 #include "utility.h"
 
+// 안녕하세요
 
 Shape* selShape(int shape, int way) {
 

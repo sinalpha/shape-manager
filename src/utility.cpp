@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 
+
 #include "utility.h"
 
 // 안녕하세요
@@ -31,7 +32,7 @@ Triangle* newTriangle(int way) {
 	case INPUT:
 		//점 3개 얻기
 		for (int i = 0; i < 3; ++i) {
-			std::cout << "입력 x" << i + 1 << ", y" << i + 1 << '\n';
+			std::cout << "입력 x" << i + 1 << " y" << i + 1 << '\n';
 			std::cin >> points[i].x >> points[i].y;
 		}
 		return new Triangle(points[0], points[1], points[2]);
@@ -50,7 +51,7 @@ Circle* newCircle(int way) {
 		case DEFAULT:
 			return new Circle;
 		case INPUT:
-			std::cout << "입력 x, y, r" << '\n';
+			std::cout << "입력 x y r" << '\n';
 			std::cin >> point.x >> point.y >> r;
 			return new Circle(point, r);
 		default:
@@ -69,7 +70,7 @@ Rectangle* newRectangle(int way){
 			return new Rectangle;
 		case INPUT:
 			for (int i = 0; i < 2; ++i) {
-				std::cout << "입력 x" << i + 1 << ", y" << i + 1 << '\n';
+				std::cout << "입력 x" << i + 1 << " y" << i + 1 << '\n';
 				std::cin >> points[i].x >> points[i].y;
 			}
 			return new Rectangle(points[0], points[1]);
@@ -88,7 +89,7 @@ Line* newLine(int way){
 			return new Line;
 		case INPUT:
 			for (int i = 0; i < 2; ++i) {
-				std::cout << "입력 x" << i + 1 << ", y" << i + 1 << '\n';
+				std::cout << "입력 x" << i + 1 << " y" << i + 1 << '\n';
 				std::cin >> points[i].x >> points[i].y;
 			}
 			return new Line(points[0], points[1]);
@@ -129,7 +130,7 @@ int getOption() {
 	std::cin >> option;
 	
 	if (iswdigit(option[0]))
-		return option[0] - '0';
+		return std::stoi(option);
 	else
 		return 9;
 }

@@ -18,9 +18,9 @@ int main()
 
 	int option;
 	while (0 != (option = getOption())) {
-		
+
 		std::string input1, input2{};
-		
+
 		switch (option) {
 		case CREATE_SHAPE:
 			std::cout << "(도형) (생성 방법): ";
@@ -29,7 +29,7 @@ int main()
 				std::cout << insertHelp;
 				continue;
 			}
-			if (not sm.insert(selShape(input1[0] - '0', input2[0] - '0')))
+			if (not sm.insert(selShape(std::stoi(input1), std::stoi(input2))))
 				std::cout << insertHelp;
 			break;
 
@@ -44,8 +44,8 @@ int main()
 			std::cin >> input1;
 			deleteSpecificShape(input1, sm);
 			break;
-		
-		
+
+
 		case DELETE_NTH_SHAPE:
 			std::cout << "지울 도형의 위치 : ";
 			std::cin >> input1;
@@ -60,7 +60,7 @@ int main()
 			std::cin >> input1;
 			sm.save(input1);
 			break;
-		
+
 
 		case LOAD_SHAPE:
 			std::cout << "로드할 파일을 입력하시오: ";
@@ -72,11 +72,11 @@ int main()
 		default:
 			std::cout << help;
 		}
-			
-	}
-		
 
-		
+	}
+
+
+
 }
 
 

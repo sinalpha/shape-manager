@@ -1,7 +1,5 @@
 #include <iostream>
 #include <string>
-
-
 #include "utility.h"
 
 Shape* selShape(int shape, int way) {

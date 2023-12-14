@@ -118,9 +118,6 @@ void ShapeManager::save(const string& fileName) const {
 
 void ShapeManager::load(ifstream& in, Shape* loadedShape) {
 
-
-
-
 	in >> *loadedShape;
 	insert(loadedShape);
 

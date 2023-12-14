@@ -20,11 +20,11 @@ enum ACTION_TYPE {
 	DELETE_NTH_SHAPE,
 	SAVE_SHAPE,
 	LOAD_SHAPE,
+	NONE = 9
 };
 
 enum SHAPE_TYPE {
-	NONE = 0,
-	CIRCLE,
+	CIRCLE = 1,
 	RECTANGLE,
 	TRIANGLE,
 	LINE
@@ -38,10 +38,24 @@ Triangle* newTriangle(int);
 Circle* newCircle(int);
 Rectangle* newRectangle(int);
 Line* newLine(int);
-
 bool checkIsDigit(const std::string&);
 bool checkInput(const std::string&);
 int getOption();
 int stringToInt(const std::string&);
+void deleteSpecificShapeLoop(ShapeManager&);
 void deleteSpecificShape(std::string, ShapeManager&);
 void loadShapes(std::string, ShapeManager&);
+
+template <typename T>
+void deleteSpecificShapeLoop(ShapeManager& sm) {
+
+
+	Shape* shape;
+
+	for (int i = 1; nullptr != (shape = sm.returnNthShape(i)); ++i)
+		if (dynamic_cast<T>(shape)) {
+			sm.deleteNthShape(i--);
+		}
+			
+
+}

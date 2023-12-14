@@ -4,8 +4,6 @@
 
 #include "utility.h"
 
-// 안녕하세요
-
 Shape* selShape(int shape, int way) {
 
 	switch (shape) {
@@ -22,7 +20,7 @@ Shape* selShape(int shape, int way) {
 	}
 
 }
-// To Do 지정해서 생성을 더 깔끔하게 만들기
+
 Triangle* newTriangle(int way) {
 
 	Point points[3];
@@ -132,38 +130,20 @@ int getOption() {
 	if (iswdigit(option[0]))
 		return std::stoi(option);
 	else
-		return 9;
+		return NONE;
 }
 
-int stringToInt(const std::string& str) {
-	if (str == "Triangle")
-		return TRIANGLE;
-	else if (str == "Circle")
-		return CIRCLE;
-	else if (str == "Line")
-		return LINE;
-	else if (str == "Rectangle")
-		return RECTANGLE;
-	else
-		return NONE;
-}	
 
 void deleteSpecificShape(std::string shapesType, ShapeManager& sm) {
 
-	std::cout << shapesType;
-
-	Shape* shape;
-	// 비효율적이지만 그냥 이렇게 합시다
-	for (int i = 1; nullptr != (shape = sm.returnNthShape(i)); ++i) {
-		if (("선" == shapesType) and dynamic_cast<Line*>(shape))
-			sm.deleteNthShape(i--);	
-		if (("삼각형" == shapesType) and dynamic_cast<Triangle*>(shape))
-			sm.deleteNthShape(i--);
-		if (("사각형" == shapesType) and dynamic_cast<Rectangle*>(shape))
-			sm.deleteNthShape(i--);
-		if (("원" == shapesType) and dynamic_cast<Circle*>(shape))
-			sm.deleteNthShape(i--);
-	}
+	if (("선" == shapesType))
+		deleteSpecificShapeLoop<Line*>(sm);
+	else if (("삼각형" == shapesType))
+		deleteSpecificShapeLoop<Triangle*>(sm);
+	else if (("사각형" == shapesType))
+		deleteSpecificShapeLoop<Rectangle*>(sm);
+	else if (("원" == shapesType) )
+		deleteSpecificShapeLoop<Circle*>(sm);
 
 }
 
@@ -172,6 +152,8 @@ void loadShapes(std::string fileName, ShapeManager& sm) {
 
 	if (not in)
 		return;
+
+	sm.deleteAllShape();
 
 	int input;
 	while (in >> input)

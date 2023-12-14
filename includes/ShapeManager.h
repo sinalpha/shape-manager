@@ -23,6 +23,7 @@ public:
 	~ShapeManager();
 	ShapeManager(const ShapeManager&) = default;
 
+	void deleteAllShape();
 	bool insert(Shape*);
 	void draw() const;
 	void save(const std::string&) const;
@@ -30,5 +31,7 @@ public:
 	Shape* returnNthShape(int) const;
 	void deleteNthShape(int);
 	void increaseCapacity();
+
+
 
 };

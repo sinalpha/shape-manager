@@ -19,6 +19,7 @@ ShapeManager::ShapeManager(int n)
 	shapes = new Shape*[capacity];
 
 }
+
 ShapeManager::~ShapeManager()
 {
 	for (int i = 0; i < nShape; ++i)
@@ -43,6 +44,14 @@ bool ShapeManager::insert(Shape* a)
 	return true;
 
 }
+
+void ShapeManager::deleteAllShape() {
+	for (int i = 0; i < nShape; ++i)
+		delete shapes[i];
+
+	nShape = 0;
+}
+
 void ShapeManager::draw() const
 {
 
@@ -65,6 +74,7 @@ void ShapeManager::draw() const
 	std::cout << "---------------------------------------" << '\n';
 
 }
+
 Shape* ShapeManager::returnNthShape(int i) const {
 
 	if (0 >= i or i > nShape)
@@ -73,6 +83,7 @@ Shape* ShapeManager::returnNthShape(int i) const {
 	return shapes[i - 1];
 
 }
+
 void ShapeManager::deleteNthShape(int n) {
 
 	if (0 >= n or nShape < n) 
@@ -86,6 +97,7 @@ void ShapeManager::deleteNthShape(int n) {
 	--nShape;
 
 }
+
 void ShapeManager::increaseCapacity() {
 
 	Shape** temp = shapes;
@@ -95,6 +107,7 @@ void ShapeManager::increaseCapacity() {
 	delete[] temp;
 
 }
+
 void ShapeManager::save(const string& fileName) const {
 
 	ofstream out{ fileName };
@@ -102,7 +115,11 @@ void ShapeManager::save(const string& fileName) const {
 		out << shapes[i]->save() + " ";
 
 }
+
 void ShapeManager::load(ifstream& in, Shape* loadedShape) {
+
+
+
 
 	in >> *loadedShape;
 	insert(loadedShape);

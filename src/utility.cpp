@@ -116,7 +116,6 @@ int getOption() {
 		return NONE;
 }
 
-
 void deleteSpecificShape(std::string shapesType, ShapeManager& sm) {
 
 	if (("¼±" == shapesType))

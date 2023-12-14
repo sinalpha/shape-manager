@@ -38,8 +38,6 @@ Triangle* newTriangle(int);
 Circle* newCircle(int);
 Rectangle* newRectangle(int);
 Line* newLine(int);
-bool checkIsDigit(const std::string&);
-bool checkInput(const std::string&);
 int getOption();
 int stringToInt(const std::string&);
 void deleteSpecificShapeLoop(ShapeManager&);

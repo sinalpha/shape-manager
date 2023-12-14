@@ -28,7 +28,6 @@ Triangle* newTriangle(int way) {
 	case DEFAULT:
 		return new Triangle;
 	case INPUT:
-		//점 3개 얻기
 		for (int i = 0; i < 3; ++i) {
 			std::cout << "입력 x" << i + 1 << " y" << i + 1 << '\n';
 			std::cin >> points[i].x >> points[i].y;
@@ -102,22 +101,6 @@ bool checkIsDigit(const std::string& str) {
 	for (int i = 0; i < str.size(); ++i)
 		if (!iswdigit(str[i]))
 			return false;
-
-	return true;
-}
-
-bool checkIsAlpha(const std::string& str) {
-	
-	for (int i = 0; i < str.size(); ++i)
-		if (!iswalpha(str[i]))
-			return false;
-	return true;
-}
-
-bool checkInput(const std::string& str) {
-	
-	if (checkIsAlpha(str) and checkIsDigit(str))
-		return false;
 
 	return true;
 }

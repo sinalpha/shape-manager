@@ -23,6 +23,6 @@ public:
 	~Circle();				
 
 	std::string save() const override;
-	virtual void draw() const override;
+	void draw() const override;
 	void load(std::ifstream& in) override;
 };
